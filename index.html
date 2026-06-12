@@ -331,22 +331,22 @@
 
 <!-- Sticky emotion nav -->
 <nav id="emotion-nav">
-  <button class="em-btn" onclick="scrollTo('cover')">Portada</button>
-  <button class="em-btn" onclick="scrollTo('amor')">Amor</button>
-  <button class="em-btn" onclick="scrollTo('nostalgia')">Nostalgia</button>
-  <button class="em-btn" onclick="scrollTo('alegria')">Alegría</button>
-  <button class="em-btn" onclick="scrollTo('gratitud')">Gratitud</button>
-  <button class="em-btn" onclick="scrollTo('promesas')">Promesas</button>
-  <button class="em-btn" onclick="scrollTo('soledad')">Soledad</button>
-  <button class="em-btn" onclick="scrollTo('admiracion')">Admiración</button>
-  <button class="em-btn" onclick="scrollTo('calma')">Calma</button>
-  <button class="em-btn" onclick="scrollTo('recuerdos')">Recuerdos</button>
-  <button class="em-btn" onclick="scrollTo('miedo')">Miedo</button>
-  <button class="em-btn" onclick="scrollTo('orgullo')">Orgullo</button>
-  <button class="em-btn" onclick="scrollTo('anhelo')">Anhelo</button>
-  <button class="em-btn" onclick="scrollTo('ternura')">Ternura</button>
-  <button class="em-btn" onclick="scrollTo('eternidad')">Eternidad</button>
-  <button class="em-btn" onclick="scrollTo('cierre')">Cierre</button>
+  <button class="em-btn" onclick="goToSection('cover')">Portada</button>
+  <button class="em-btn" onclick="goToSection('amor')">Amor</button>
+  <button class="em-btn" onclick="goToSection('nostalgia')">Nostalgia</button>
+  <button class="em-btn" onclick="goToSection('alegria')">Alegría</button>
+  <button class="em-btn" onclick="goToSection('gratitud')">Gratitud</button>
+  <button class="em-btn" onclick="goToSection('promesas')">Promesas</button>
+  <button class="em-btn" onclick="goToSection('soledad')">Soledad</button>
+  <button class="em-btn" onclick="goToSection('admiracion')">Admiración</button>
+  <button class="em-btn" onclick="goToSection('calma')">Calma</button>
+  <button class="em-btn" onclick="goToSection('recuerdos')">Recuerdos</button>
+  <button class="em-btn" onclick="goToSection('miedo')">Miedo</button>
+  <button class="em-btn" onclick="goToSection('orgullo')">Orgullo</button>
+  <button class="em-btn" onclick="goToSection('anhelo')">Anhelo</button>
+  <button class="em-btn" onclick="goToSection('ternura')">Ternura</button>
+  <button class="em-btn" onclick="goToSection('eternidad')">Eternidad</button>
+  <button class="em-btn" onclick="goToSection('cierre')">Cierre</button>
 </nav>
 
 <div id="book">
@@ -633,7 +633,7 @@
   pages.forEach(p => obs.observe(p));
 
   /* ── SCROLL NAV ── */
-  function scrollTo(id) {
+  function goToSection(id) {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
