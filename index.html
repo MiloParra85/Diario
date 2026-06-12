@@ -1,209 +1,662 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Mi Niña Hermosa</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mi Libro Para Ti ♡</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Great+Vibes&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --rose:     #E8A0B4;
+      --rose-lt:  #F5C6D5;
+      --blush:    #FDF0F4;
+      --cream:    #FFFBFD;
+      --ink:      #4A3540;
+      --gold:     #E8C9A0;
+      --gold-lt:  #F5E0C0;
+      --shadow:   rgba(232, 160, 180, 0.22);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: #e8d5e0;
+      font-family: 'Poppins', sans-serif;
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── PARTICLES ── */
+    #particles {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    }
+    .petal {
+      position: absolute;
+      font-size: clamp(10px, 2vw, 18px);
+      opacity: 0;
+      animation: fallPetal linear infinite;
+    }
+    @keyframes fallPetal {
+      0%   { transform: translateY(-40px) rotate(0deg); opacity: 0; }
+      10%  { opacity: 0.7; }
+      90%  { opacity: 0.5; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* ── BOOK WRAPPER ── */
+    #book {
+      position: relative;
+      z-index: 1;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    /* ── PAGES ── */
+    .page {
+      background: var(--cream);
+      border-radius: 4px 18px 18px 4px;
+      box-shadow:
+        -6px 0 0 #d9a8c0,
+        0 8px 40px rgba(180,120,150,0.18),
+        inset -3px 0 8px rgba(0,0,0,0.03);
+      margin-bottom: 60px;
+      padding: 60px 64px 70px;
+      position: relative;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      border-left: 10px solid #d9a8c0;
+    }
+    .page.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* spine dots */
+    .page::before {
+      content: '';
+      position: absolute;
+      left: -22px; top: 30px; bottom: 30px; width: 4px;
+      background: repeating-linear-gradient(to bottom, #c9a0b8 0 8px, transparent 8px 14px);
+      border-radius: 2px;
+    }
+
+    /* page number */
+    .page-num {
+      position: absolute;
+      bottom: 22px; right: 36px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #c9a0b8;
+      letter-spacing: 2px;
+      opacity: 0.8;
+    }
+
+    /* gold rule */
+    .rule {
+      width: 60px; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 20px auto;
+    }
+
+    /* ── COVER ── */
+    .cover {
+      background: linear-gradient(160deg, #f0d6e4 0%, #fce8f0 40%, #e8d0e0 100%);
+      color: var(--ink);
+      text-align: center;
+      padding: 80px 50px 90px;
+      border-left: 10px solid var(--gold);
+      border-radius: 4px 18px 18px 4px;
+      box-shadow: -6px 0 0 #c9a0b8, 0 12px 60px rgba(180,120,150,0.25);
+      margin-bottom: 60px;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(0.96);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .cover.visible { opacity: 1; transform: scale(1); }
+
+    .cover-glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 40%, rgba(232,160,180,0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cover-photo-wrap {
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      margin: 0 auto 36px;
+      border: 4px solid var(--gold);
+      box-shadow: 0 0 0 8px rgba(201,169,110,0.18), 0 8px 40px rgba(0,0,0,0.5);
+      overflow: hidden;
+      position: relative;
+    }
+    .cover-photo-wrap img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .cover-photo-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #f0c0d4, #dbaec8);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 60px;
+      color: #fff;
+    }
+
+    .cover-pretitle {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(18px, 4vw, 28px);
+      color: #b07090;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+    .cover-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(32px, 7vw, 62px);
+      font-weight: 700;
+      line-height: 1.1;
+      color: #4a3040;
+      text-shadow: 0 2px 20px rgba(232,160,180,0.3);
+      margin-bottom: 10px;
+    }
+    .cover-title em {
+      font-style: italic;
+      color: var(--rose);
+    }
+    .cover-subtitle {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(13px, 2.2vw, 17px);
+      color: #8a6070;
+      font-style: italic;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+      margin-top: 22px;
+    }
+
+    .cover-ornament {
+      font-size: 28px;
+      color: var(--rose);
+      letter-spacing: 10px;
+      margin: 30px 0 10px;
+      display: block;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-eyebrow {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(11px, 1.8vw, 13px);
+      font-weight: 500;
+      color: var(--rose);
+      text-align: center;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .page-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(20px, 3.5vw, 30px);
+      font-weight: 700;
+      text-align: center;
+      color: var(--ink);
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+    .page-title em { font-style: italic; color: var(--rose); }
+
+    /* ── BODY TEXT ── */
+    .page-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(13px, 1.7vw, 15.5px);
+      font-weight: 300;
+      line-height: 2;
+      color: #5a4050;
+      text-align: justify;
+      hyphens: auto;
+      margin-top: 28px;
+    }
+    .page-text p { margin-bottom: 18px; }
+    .page-text p:first-child::first-letter {
+      font-family: 'Poppins', sans-serif;
+      font-size: 3.4em;
+      font-weight: 700;
+      color: var(--rose);
+      float: left;
+      line-height: 0.78;
+      margin: 6px 10px 0 0;
+    }
+    .page-text strong { color: var(--rose); font-weight: 600; }
+    .page-text em { font-style: italic; color: #8a6070; }
+
+    /* ── QUOTE ── */
+    .page-quote {
+      border-left: 3px solid var(--rose);
+      margin: 28px 0;
+      padding: 14px 24px;
+      background: var(--blush);
+      border-radius: 0 8px 8px 0;
+    }
+    .page-quote p {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(13px, 1.8vw, 16px);
+      font-style: italic;
+      font-weight: 400;
+      color: #b07090;
+      line-height: 1.7;
+      margin: 0;
+    }
+    .page-quote p::before { content: '\201C'; }
+    .page-quote p::after  { content: '\201D'; }
+
+    /* ── EMOTION TABS ── */
+    #emotion-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      padding: 14px 16px;
+      background: rgba(240, 220, 230, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232,160,180,0.3);
+      margin-bottom: 48px;
+    }
+    .em-btn {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.8px;
+      padding: 7px 16px;
+      border: 1.5px solid rgba(232,160,180,0.6);
+      border-radius: 20px;
+      background: transparent;
+      color: #b07090;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+    }
+    .em-btn:hover, .em-btn.active {
+      background: var(--rose);
+      border-color: var(--rose);
+      color: #fff;
+      box-shadow: 0 0 12px var(--shadow);
+    }
+
+    /* ── HEARTS DECORATION ── */
+    .deco-hearts {
+      text-align: center;
+      font-size: 20px;
+      letter-spacing: 8px;
+      color: var(--rose);
+      margin: 22px 0 10px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .page { padding: 36px 28px 50px; }
+      .cover { padding: 60px 28px 70px; }
+      #emotion-nav { gap: 6px; }
+      .em-btn { font-size: 10px; padding: 6px 12px; }
+    }
+
+    /* ── BACK-TO-TOP ── */
+    #back-top {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--rose);
+      color: #fff;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 18px var(--shadow);
+      opacity: 0;
+      transition: opacity 0.4s;
+      z-index: 200;
+    }
+    #back-top.show { opacity: 1; }
+  </style>
 </head>
 <body>
 
-    <div class="background-decorations">
-        <div class="heart h1"></div>
-        <div class="heart h2"></div>
-        <div class="heart h3"></div>
+<!-- Floating petals -->
+<div id="particles"></div>
+
+<!-- Sticky emotion nav -->
+<nav id="emotion-nav">
+  <button class="em-btn" onclick="scrollTo('cover')">Portada</button>
+  <button class="em-btn" onclick="scrollTo('amor')">Amor</button>
+  <button class="em-btn" onclick="scrollTo('nostalgia')">Nostalgia</button>
+  <button class="em-btn" onclick="scrollTo('alegria')">Alegría</button>
+  <button class="em-btn" onclick="scrollTo('gratitud')">Gratitud</button>
+  <button class="em-btn" onclick="scrollTo('promesas')">Promesas</button>
+  <button class="em-btn" onclick="scrollTo('soledad')">Soledad</button>
+  <button class="em-btn" onclick="scrollTo('admiracion')">Admiración</button>
+  <button class="em-btn" onclick="scrollTo('calma')">Calma</button>
+  <button class="em-btn" onclick="scrollTo('recuerdos')">Recuerdos</button>
+  <button class="em-btn" onclick="scrollTo('miedo')">Miedo</button>
+  <button class="em-btn" onclick="scrollTo('orgullo')">Orgullo</button>
+  <button class="em-btn" onclick="scrollTo('anhelo')">Anhelo</button>
+  <button class="em-btn" onclick="scrollTo('ternura')">Ternura</button>
+  <button class="em-btn" onclick="scrollTo('eternidad')">Eternidad</button>
+  <button class="em-btn" onclick="scrollTo('cierre')">Cierre</button>
+</nav>
+
+<div id="book">
+
+  <!-- PORTADA -->
+  <div class="cover page" id="cover">
+    <div class="cover-glow"></div>
+    <div class="cover-photo-wrap">
+      <!-- Reemplaza 'foto.jpg' con el nombre real de tu imagen -->
+      <img src="foto.jpg" alt="Mi amor" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+      <div class="cover-photo-placeholder" style="display:none;">♡</div>
     </div>
+    <div class="cover-pretitle">Para ti, Brissia, siempre para ti</div>
+    <h1 class="cover-title">Lo que la <em>Distancia</em><br>No Puede Borrar</h1>
+    <span class="cover-ornament">✦ ✦ ✦</span>
+    <p class="cover-subtitle">Un libro escrito por Camilo, con cada latido que tú me enseñaste a sentir desde lejos</p>
+  </div>
 
-    <div class="main-container">
-        <!-- Menú de navegación por emociones -->
-        <div class="emotion-menu">
-            <h3>¿Cómo te sientes hoy, mi amor?</h3>
-            <div class="menu-buttons">
-                <button onclick="goToPage(2)">Feliz</button>
-                <button onclick="goToPage(4)">Triste o Cansada</button>
-                <button onclick="goToPage(6)">Extrañándome</button>
-                <button onclick="goToPage(8)">Insegura</button>
-                <button onclick="goToPage(10)">Abrumada</button>
-                <button onclick="goToPage(12)">Amada</button>
-                <button onclick="goToPage(14)">Nostálgica</button>
-            </div>
-        </div>
-
-        <!-- El Libro -->
-        <div class="book-container">
-            <div class="book" id="book">
-                
-                <!-- PÁGINA 1: PORTADA -->
-                <div class="page cover-page active">
-                    <div class="cover-content">
-                        <h1 class="main-title">Un Refugio para Ti</h1>
-                        <div class="photo-frame">
-                            <!-- Aquí va la foto. Asegúrate de tener 'portada.jpg' en la misma carpeta -->
-                            <img src="portada.jpg" alt="Mi niña hermosa" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=600&auto=format&fit=crop'">
-                        </div>
-                        <p class="subtitle">Abre este libro cuando tu corazón lo necesite...</p>
-                        <p class="signature">Hecho con todo mi amor</p>
-                    </div>
-                </div>
-
-                <!-- PÁGINAS 2 Y 3: CUANDO ESTÁS FELIZ -->
-                <div class="page">
-                    <div class="page-content">
-                        <span class="page-number">2</span>
-                        <h2 class="emotion-title">Cuando estás Feliz (Parte I)</h2>
-                        <p class="love-text">
-                            Ver tu sonrisa o saber que tu día desborda alegría es, sin duda alguna, el motor que impulsa mis propios días. Tu felicidad tiene un eco profundo en mí, una capacidad mágica de iluminar cualquier rincón oscuro de mi mente. Cuando ríes, el mundo entero parece sincronizarse en una melodía perfecta, y no hay distancia, por muy grande o pesada que parezca, que pueda apagar el brillo de saberte plena. Me encanta cuando me cuentas esas pequeñas victorias de tu día, cuando me envías un mensaje cargado de entusiasmo o cuando simplemente sientes que la vida te sonríe. Quiero que guardes este fragmento en tu memoria para esos días en que las nubes intenten tapar tu sol: tu alegría es un regalo para este mundo, y específicamente para mí, es el recordatorio constante de que la belleza real existe. Nunca dejes de buscar esos motivos que te hacen vibrar alto, porque ver cómo conquistas tu propio bienestar es una de las experiencias más inspiradoras que tengo la fortuna de presenciar. En la distancia, celebro cada uno de tus logros y cada destello de tu felicidad como si fuera propio. Eres pura luz, mi niña, y saber que hoy tu corazón está contento me da una paz infinita, una certeza de que estamos construyendo un camino hermoso donde tu bienestar siempre será mi prioridad absoluta. Sigue brillando así de fuerte, amor.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="page">
-                    <div class="page-content">
-                        <span class="page-number">3</span>
-                        <h2 class="emotion-title">Cuando estás Feliz (Parte II)</h2>
-                        <p class="love-text">
-                            Esa energía tan bonita que desprendes cuando estás feliz es algo que se queda grabado en mí durante horas. Me pongo a pensar en la suerte tan inmensa que tengo de compartir la vida contigo, de ser la persona que escucha tus risas y que recibe tus audios llenos de emoción. Tu felicidad no es solo tuya, es un bienestar que se expande y me abraza a mí también, recordándome que lo nuestro es un refugio seguro. Quiero que celebres cada momento feliz, que te sientas orgullosa de quien eres y de todo lo que estás logrando día con día. A veces la vida nos llena de pendientes y de rutinas pesadas, pero ver que te tomas el tiempo de disfrutar, de sonreír por las cosas sencillas y de sentirte plena, me llena de un orgullo indescriptible. Eres una mujer increíble, llena de virtudes, y te mereces absolutamente todo lo bueno que te está pasando hoy. Guarda esta sensación bonita en tu pecho, saboréala y recuerda que siempre estaré aquí para aplaudir tus éxitos, para reírme contigo y para asegurarme de que nunca te falten motivos para mantener esa hermosa sonrisa en tu rostro. Que este estado de paz y alegría te acompañe durante mucho tiempo, y cuando flaquee, regresa aquí para recordar lo bien que se siente ver el mundo a través de tus ojos felices. Te amo con todo mi ser.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- PÁGINAS 4 Y 5: CUANDO ESTÁS TRISTE O CANSADA -->
-                <div class="page">
-                    <div class="page-content">
-                        <span class="page-number">4</span>
-                        <h2 class="emotion-title">Cuando estás Triste o Cansada (Parte I)</h2>
-                        <p class="love-text">
-                            Sé que hay días en los que el peso del mundo se siente el doble de grande y la energía parece evaporarse por completo. Si hoy es uno de esos días en los que la tristeza te acompaña o el cansancio te nubla los pensamientos, quiero que te detengas un momento, respires profundo y te permitas sentir. No tienes que ser fuerte todo el tiempo, mi amor; está bien estar cansada, está bien no tener todas las respuestas y está bien dejar caer los hombros. Me duele no poder estar físicamente a tu lado para darte un abrazo de esos que reconstruyen el alma, pero quiero que cierres los ojos e imagines mis brazos rodeándote con toda la ternura del mundo. Estoy aquí contigo, sosteniéndote en el silencio, escuchando lo que tu corazón no puede expresar con palabras. Eres una mujer asombrosamente fuerte, pero incluso las almas más resilientes necesitan un descanso. No te presiones por resolver todo hoy; el mundo puede esperar un momento mientras tú te cuidas y recuperas tus fuerzas. Permítete llorar si lo necesitas, deja salir todo eso que te abruma. Recuerda que la tristeza es solo una nube pasajera y que detrás de ella, tu luz sigue intacta. Yo me quedo aquí cuidando de ti en la distancia, recordándote lo valiosa que eres y esperando pacientemente a que te sientas lista para volver a sonreír. No estás sola en esto.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="page">
-                    <div class="page-content">
-                        <span class="page-number">5</span>
-                        <h2 class="emotion-title">Cuando estás Triste o Cansada (Parte II)</h2>
-                        <p class="love-text">
-                            El cansancio físico y mental a veces nos hace creer que no estamos haciendo lo suficiente, pero quiero recordarte que lo estás haciendo excelente. Mírate, has superado tantas cosas y sigues adelante con una valentía que me conmueve profundamente. Hoy no es el día para juzgarte ni para exigirte más de la cuenta; hoy es el día para consentirte, para descansar y para recordar que mi amor por ti no depende de qué tan productiva seas, sino de la maravillosa persona que eres. Si la tristeza te visita, no intentes esconderla de mí; prefiero mil veces acompañarte en tus momentos grises que solo estar en los días soleados. Nuestro amor es un espacio seguro donde puedes quitarte la armadura y ser completamente vulnerable. Descansa tu mente, mi niña, deja que los pensamientos negativos se vayan con el viento y quédate solo con la certeza de que eres profundamente amada. Mañana será otro día, con nuevas oportunidades y energías renovadas, pero hoy solo concéntrate en descansar y en dejarte querer. Imagina que te acaricio el cabello y te digo al oído que todo va a estar bien, porque realmente lo estará. Estoy increíblemente orgulloso de ti, de tu esfuerzo constante y de tu gran corazón. Tómate todo el tiempo que necesites, que yo no me voy a mover de tu lado.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- PÁGINAS 6 Y 7: CUANDO ME EXTRAÑAS -->
-                <div class="page">
-                    <div class="page-content">
-                        <span class="page-number">6</span>
-                        <h2 class="emotion-title">Cuando me Extrañas (Parte I)</h2>
-                        <p class="love-text">
-                            La distancia puede ser increíblemente difícil y sé perfectamente lo mucho que duele desear un abrazo y tener que conformarse con una pantalla. Si me estás extrañando en este preciso instante, quiero que sepas que yo también te estoy extrañando con la misma o incluso con más intensidad. Cada kilómetro que nos separa se desvanece cuando pienso en el amor tan inmenso que nos une. La distancia no debilita lo que sentimos; al contrario, es la prueba más clara de que nuestro vínculo es real, fuerte y capaz de superar cualquier obstáculo físico. No veas los días separados como un castigo, míralos como una cuenta regresiva que nos acerca cada vez más al momento de estar juntos sin horarios ni despedidas. Cuando sientas que la soledad te aprieta el pecho, mira hacia el cielo y recuerda que compartimos las mismas estrellas y el mismo sol. Mi corazón late al unísono con el tuyo, y no pasa un solo día en el que no estés presente en mis pensamientos, en mis planes y en mis deseos más profundos. Extrañarte es el precio que pago por tener la fortuna de amar a alguien tan extraordinaria como tú, y te aseguro que vale cada segundo de espera. Esto es temporal, mi vida, y la recompensa de nuestro reencuentro será tan hermosa que hará que todo este esfuerzo cobre un sentido perfecto. Te amo y te acompaño en cada pensamiento.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="page">
-                    <div class="page-content">
-                        <span class="page-number">7</span>
-                        <h2 class="emotion-title">Cuando me Extrañas (Parte II)</h2>
-                        <p class="love-text">
-                            Piensa en el momento en que volvamos a vernos: el olor de tu perfume, la calidez de tus manos entrelazadas con las mías, la primera mirada fija que nos daremos y ese abrazo eterno en el que el resto del mundo simplemente va a desaparecer. Que ese recuerdo del futuro sea tu combustible para hoy. Extrañarse también es una forma de amor; nos recuerda que lo que tenemos no es común, que nos importamos de una manera profunda y que hemos encontrado en el otro un verdadero hogar. Cuando me extrañes, busca los pequeños detalles que nos conectan: esa canción que nos gusta, los mensajes que nos dejamos, o este mismo libro que diseñé pensando exclusivamente en tu paz mental. No estás sola en este sentimiento, yo camino contigo a cada paso que das, cuidándote desde donde estoy y enviándote toda mi energía positiva. Eres mi pensamiento favorito al despertar y el último antes de dormir. La distancia física es solo un detalle técnico cuando dos almas están tan irrevocablemente entrelazadas como las nuestras. Mantén la calma, mi niña, que el tiempo pasa volando y pronto estaremos riéndonos de estos días de espera mientras nos abrazamos fuerte. Gracias por tu paciencia, por tu amor incondicional y por ser mi cable a tierra. Te amo más de lo que las palabras pueden expresar.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- PÁGINAS 8 Y 9: CUANDO TE SIENTES INSEGURA -->
-                <div class="page">
-                    <div class="page-content">
-                        <span class="page-number">8</span>
-                        <h2 class="emotion-title">Cuando te Sientes Insegura (Parte I)</h2>
-                        <p class="love-text">
-                            A veces, la mente nos juega malas pasadas y nos hace dudar de nuestro valor, de nuestra belleza o de nuestras capacidades. Si hoy te sientes insegura por cualquier motivo, quiero convertirme en el espejo que te devuelva la realidad de quién eres. Eres una mujer absolutamente maravillosa, inteligente, hermosa por dentro y por fuera, con una esencia única que llena de luz a quienes tienen la dicha de conocerte. Tus imperfecciones, esas que a veces miras con demasiada severidad, son parte del diseño perfecto que te hace ser tú, y para mí, eres perfecta en todas tus facetas. No permitas que una duda pasajera nuble la certeza de todo lo que vales. Mi amor por ti no se basa en un estándar idealizado, sino en tu realidad: en tu forma de hablar, en tu ternura, en tu resiliencia y en la manera en que cuidas de los tuyos. Cuando dudes de ti misma, recuerda que hay alguien aquí que te admira profundamente y que ve en ti una fuente inagotable de inspiración. Eres suficiente, eres valiosa y mereces ocupar espacio en este mundo con la frente muy en alto. No te compares con nadie más, porque nadie tiene tu sonrisa, nadie tiene tu gran corazón ni tu hermosa forma de ver la vida. Eres mi mayor orgullo, mi niña bonita, y mi amor por ti es firme, constante e inquebrantable, sin importar las dudas que crucen por tu mente.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="page">
-                    <div class="page-content">
-                        <span class="page-number">9</span>
-                        <h2 class="emotion-title">Cuando te Sientes Insegura (Parte II)</h2>
-                        <p class="love-text">
-                            Quiero que recuerdes que no hay nada malo en tener dudas o momentos de fragilidad, pero no dejes que esas inseguridades echen raíces en tu mente. Mírate a través de mis ojos por un instante: verías a una mujer con una fuerza increíble, una dulzura que desarma a cualquiera y una belleza que va muchísimo más allá de lo físico, una belleza que emana de tu alma noble. Cada vez que sientas miedo o incertidumbre sobre el futuro o sobre ti misma, ven a este espacio y lee esto: te elegí a ti y te sigo eligiendo todos los días de mi vida como mi compañera, mi amor y mi refugio. Tu valor no se mide por la opinión de los demás ni por los días malos en que no te sientes al cien por ciento. Eres un ser humano valiosísimo, lleno de talentos y con un futuro brillante por delante. Permítete equivocarte, permítete aprender y, sobre todo, sé más amable contigo misma. Te amo tal y como eres, con tus risas y tus llantos, con tus certezas y tus dudas. Nunca pienses que eres una carga o que no eres suficiente, porque para mí lo eres todo y mucho más. Confía en ti tanto como yo confío en ti, y camina con la seguridad de saber que tienes a alguien que te ama con locura apoyándote en cada paso del camino.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- PÁGINAS 10 Y 11: CUANDO ESTÁS ABRUMADA -->
-                <div class="page">
-                    <div class="page-content">
-                        <span class="page-number">10</span>
-                        <h2 class="emotion-title">Cuando estás Abrumada (Parte I)</h2>
-                        <p class="love-text">
-                            Cuando las responsabilidades, los deberes, las tareas y las presiones del día a día se acumulan, es muy fácil sentir que la respiración se acorta y que la mente se satura. Si te encuentras en ese estado de agobio donde todo parece urgente y caótico, te pido que hagas una pausa absoluta ahora mismo. Deja a un lado lo que estás haciendo por un minuto. Cierra los ojos. Inhala aire profundamente... reténlo... y suéltalo despacio. El mundo no se va a derrumbar si te detienes un momento a recuperar el aliento. No tienes que solucionarlo todo en este instante, ni tienes que cargar con todas las responsabilidades sobre tus hombros tú sola. Vamos a desarmar ese caos paso a paso, juntos, aunque estemos lejos. Concéntrate solo en lo que tienes justo en frente, en la tarea más pequeña, y olvídate del resto por ahora. Eres sumamente capaz y organizada, pero no eres una máquina, eres un ser humano que necesita pausas. Estoy aquí para recordarte que tu paz mental es infinitamente más importante que cualquier entrega, examen o pendiente. Si necesitas desahogarte, hablar sin parar para ordenar tus ideas o simplemente llorar de frustración, hazlo conmigo. No estás sola en medio de la tormenta, yo sostengo tu mano y te prometo que, como todas las veces anteriores, vas a salir de esta con éxito. Confío en tu capacidad, pero amo tu bienestar.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="page">
-                    <div class="page-content">
-                        <span class="page-number">11</span>
-                        <h2 class="emotion-title">Cuando estás Abrumada (Parte II)</h2>
-                        <p class="love-text">
-                            Es normal sentir que las cosas se salen de control de vez en cuando, el agobio es parte de la vida activa que llevas, pero no dejes que defina tu día. Quiero que mires este texto como un espacio de calma en medio de tu rutina ruidosa. Imagina un lugar tranquilo, en silencio, donde solo estamos tú y yo, lejos de los deberes y las presiones del entorno. Ese es nuestro espacio real, el que verdaderamente importa. Lo demás es secundario y temporal. No te exijas perfección en todo lo que haces; hacer lo mejor que puedes con la energía que tienes disponible hoy ya es más que suficiente. Aprende a decir que no cuando tu cuerpo y tu mente te lo pidan, pon límites para proteger tu tranquilidad. Yo admiro muchísimo tu dedicación y tu ética, pero me importa mucho más ver que te cuidas. Si el día de hoy se siente como una montaña empinada, recuerda que no tienes que llegar a la cima en un solo salto, basta con dar un paso a la vez. Tómate las cosas con calma, trátate con suavidad y recuerda que este nudo en la garganta va a pasar pronto. Te envío un abrazo lleno de paz, fuerza y serenidad para que disuelva ese estrés que tienes acumulado. Todo estará bien, mi niña, confía en el proceso y descansa.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- PÁGINAS 12 Y 13: CUANDO QUIERES SENTIRTE AMADA -->
-                <div class="page">
-                    <div class="page-content">
-                        <span class="page-number">12</span>
-                        <h2 class="emotion-title">Cuando quieres sentirte Amada (Parte I)</h2>
-                        <p class="love-text">
-                            Si entraste a esta página buscando una dosis de amor, quiero que te prepares para leer lo mucho que significas para mí. Decir que te amo se queda corto ante la inmensidad de lo que realmente siento en mi pecho cada vez que pienso en ti. Eres la persona que cambió por completo mi perspectiva del mundo, trayendo consigo una ternura, una complicidad y una alegría que no sabía que existían de esta manera tan pura. Amar a alguien como tú es un privilegio diario: amo tu voz, la forma en que tus ojos se achican cuando te ríes, tu inteligencia brillante, tus pasiones y hasta tus manías más pequeñas. Eres mi primer pensamiento al despertar y la razón por la que sonrío mirando la pantalla del celular como un tonto en mitad del día. No hay distancia que pueda disminuir la fuerza de este sentimiento, porque estás arraigada en mi corazón de una forma definitiva. Quiero que nunca, bajo ninguna circunstancia, dudes del lugar tan sagrado que ocupas en mi vida. Eres mi prioridad, mi proyecto favorito de futuro y la persona con la que quiero compartir mis mayores alegrías y apoyarme en mis peores caídas. Tu amor me hace una mejor persona, me inspira a crecer y me llena de una gratitud inmensa hacia la vida por haber cruzado nuestros caminos de una forma tan perfecta.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="page">
-                    <div class="page-content">
-                        <span class="page-number">13</span>
-                        <h2 class="emotion-title">Cuando quieres sentirte Amada (Parte II)</h2>
-                        <p class="love-text">
-                            Mi amor por ti es un compromiso activo de cuidarte, respetarte y valorarte cada día, recordándote lo especial que eres incluso cuando tú misma lo olvides. Eres la dueña absoluta de mis sonrisas más sinceras y de mis mejores deseos. Me fascina la forma en que nos entendemos con solo un mensaje, la complicidad que hemos construido a pesar de los kilómetros y la certeza de saber que somos un equipo inquebrantable. No importa lo que pase en el mundo exterior, en mis brazos y en mi corazón siempre tendrás un hogar seguro, un refugio cálido donde eres completamente aceptada, admirada y amada sin condiciones. Eres mi hermosa niña, mi compañera de vida y mi amor eterno. Cada detalle tuyo tiene un valor incalculable para mí, y me siento el hombre más afortunado del universo por tener el derecho de llamarte mi novia. Quédate con esta certeza absoluta hoy y siempre: eres profundamente amada, deseada y valorada por este novio que no ve la hora de tenerte cerca para demostrártelo en persona con mil besos. Tu existencia es el regalo más bonito que he recibido, y prometo pasar el resto de mis días cuidando este amor tan hermoso que nos une. Nunca olvides lo mucho que te amo.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- PÁGINAS 14 Y 15: CUANDO ESTÁS NOSTÁLGICA -->
-                <div class="page">
-                    <div class="page-content">
-                        <span class="page-number">14</span>
-                        <h2 class="emotion-title">Cuando estás Nostálgica (Parte I)</h2>
-                        <p class="love-text">
-                            La nostalgia es un sentimiento agridulce que nos hace viajar al pasado, recordar momentos específicos y añorar la cercanía con fuerza. Si hoy te invade ese sentimiento, quiero que lo abraces como una prueba de lo hermoso que ha sido nuestro camino. Recuerda los días en que todo comenzó, los primeros mensajes, las risas nerviosas, las promesas silenciosas que fuimos construyendo y los momentos compartidos que hoy forman el tesoro más grande de nuestra relación. Cada recuerdo juntos es un recordatorio de por qué vale la pena cada esfuerzo actual. La nostalgia no debe ser un motivo de tristeza, sino una hermosa confirmación de que tenemos una historia real y significativa que vale la pena atesorar con el alma. Piensa en las anécdotas divertidas que nos han hecho llorar de risa, en las conversaciones profundas de madrugada donde nos abrimos por completo y en los pequeños rituales que solo nosotros entendemos. Todo eso es nuestro, nadie nos lo puede quitar, y es la base sólida sobre la cual seguimos construyendo nuestro amor día con día. Deja que esos recuerdos te den calidez en el pecho hoy, como una manta suave que te protege del frío de la distancia. El pasado ha sido maravilloso a tu lado, pero te aseguro que el futuro que nos espera será aún más increíble.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="page">
-                    <div class="page-content">
-                        <span class="page-number">15</span>
-                        <h2 class="emotion-title">Cuando estás Nostálgica (Parte II)</h2>
-                        <p class="love-text">
-                            Miras atrás y ves cuánto hemos crecido, cómo hemos madurado juntos y cómo nuestro amor se ha fortalecido superando cada pequeña o gran prueba que la vida nos ha puesto en el camino. Estar nostálgica es normal, es el reflejo de un corazón que ama intensamente y que sabe apreciar los momentos hermosos de la vida. Quiero que uses esa nostalgia como inspiración para imaginar todo lo que nos falta por vivir: los viajes que planeamos, la casa que diseñaremos en nuestra mente, las mañanas despertando juntos sin prisas y las rutinas sencillas que compartiremos día a día. Estamos construyendo una historia de amor de las que valen la pena contar, una historia llena de respeto, superación y una ternura inigualable. No te sientas triste por lo que hoy añoras, siéntete emocionada por la certeza de que volveremos a crear recuerdos aún más bellos muy pronto. Te llevo conmigo en cada paso, en cada rincón de mi memoria y en cada latido. Eres mi cable a tierra y mi mayor inspiración. Gracias por regalarme un pasado tan hermoso y por darme el motivo más grande para mirar al futuro con esperanza y entusiasmo. Te amo con toda mi alma, mi niña linda, hoy, mañana y para siempre. Gracias por ser tú.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Botones de navegación del libro -->
-        <div class="navigation-buttons">
-            <button id="prevBtn" onclick="prevPage()">◀ Anterior</button>
-            <button id="nextBtn" onclick="nextPage()">Siguiente ▶</button>
-        </div>
+  <!-- PÁGINA 1 — AMOR -->
+  <div class="page" id="amor">
+    <div class="page-eyebrow">Emoción I</div>
+    <h2 class="page-title">El <em>Amor</em> que me Desborda</h2>
+    <div class="rule"></div>
+    <div class="page-text">
+      <p>Hay algo que nadie te prepara para sentir: el momento exacto en que una persona deja de ser alguien más en el mundo y se convierte en tu mundo entero. Y lo más curioso de todo es que eso me pasó a mí, Camilo, estando lejos de ti, Brissia. No fue un instante de los que salen en las películas, donde dos personas se encuentran y las miradas lo dicen todo. Fue algo que creció despacio, en pantallas encendidas a deshoras, en mensajes que llegaban justo cuando más los necesitaba, en risas que viajaban kilómetros para llegar a mí y aun así llegaban cargadas de toda su calidez.</p>
+      <p>El amor que siento por ti no cabe en las palabras que aprendí de canciones o poemas. Es algo más parecido al silencio de la madrugada cuando todo el mundo duerme y yo pienso en ti, Brissia, que estás en otro lugar del mundo respirando, siendo, existiendo en la misma realidad que yo aunque separados por una distancia que a veces duele y otras veces simplemente es. No es el amor cómodo de quien tiene al otro al alcance de la mano; es un amor que se gana todos los días con elección consciente, con paciencia, con la certeza de que lo que hay entre nosotros vale cada kilómetro de por medio.</p>
+      <p>Te amo en los días buenos, cuando todo brilla y tú eres la razón por la que brilla más, aunque no estés aquí para verlo conmigo. Te amo en los días difíciles, cuando el mundo pesa y lo único que quiero es tu voz, tu presencia, aunque sea a través de una pantalla. Te amo cuando me haces reír hasta que me duele el estómago con un audio grabado desde lejos, y te amo en el silencio compartido de una videollamada donde ninguno dice nada pero los dos sabemos que estar ahí, juntos aunque sea así, ya es suficiente.</p>
+      <p>Este amor a distancia me ha enseñado cosas que no habría aprendido de otra manera. Me ha enseñado que la presencia no siempre es física. Que se puede extrañar a alguien y al mismo tiempo sentirse acompañado por ellos. Que la espera, cuando es por algo que vale la pena, no es tiempo perdido sino tiempo construido. Y tú, Brissia, vales todo lo que la distancia exige. Vales la espera, vales el esfuerzo, vales cada noche que termina con un "buenas noches" en lugar de un abrazo.</p>
+      <div class="page-quote"><p>Amarte desde lejos me enseñó que el amor verdadero no necesita cercanía para ser real. Solo necesita voluntad, y esa nunca me ha faltado cuando se trata de ti.</p></div>
     </div>
+    <div class="deco-hearts">♡ ♡ ♡</div>
+    <span class="page-num">— 1 —</span>
+  </div>
 
-    <script src="script.js"></script>
+  <!-- PÁGINA 2 — NOSTALGIA -->
+  <div class="page" id="nostalgia">
+    <div class="page-eyebrow">Emoción II</div>
+    <h2 class="page-title">La <em>Nostalgia</em> Dulce de Quererte</h2>
+    <div class="rule"></div>
+    <div class="page-text">
+      <p>Hay momentos en que la nostalgia me visita sin avisar, Brissia. No es una tristeza oscura; es más bien una luz tenue y dorada que se cuela por las ventanas del recuerdo y lo ilumina todo con ese color especial que solo tienen las cosas que ya pasaron pero que importaron mucho. Me llega cuando menos lo espero: en el sonido de una notificación que podría ser tuya, en una canción que sonó en alguna de nuestras llamadas, en la hora exacta en que solemos hablar y ese día por alguna razón no pudimos.</p>
+      <p>Me da nostalgia la primera vez que hablamos de verdad, cuando las palabras brotaron solas a través de la pantalla y el tiempo se dobló sobre sí mismo y de repente llevábamos horas sin notarlo, yo aquí y tú allá, y sin embargo algo en esa conversación se sentía más cercano que muchas cosas físicas que he tenido en mi vida. Me da nostalgia los primeros "te extraño" que nos dijimos, cuando todavía eran nuevos, cuando cada uno llevaba el peso completo de lo que significaba querer a alguien que está lejos y no poder hacer nada más que decirlo.</p>
+      <p>Pero esta nostalgia, Brissia, es diferente a las otras nostalgias que he sentido en la vida. No es añoranza de algo perdido, sino gratitud feroz por algo que sigue siendo. Es la maravilla de poder mirar atrás y ver que todo lo que hemos construido desde la distancia fue real, fue honesto, fue nuestro aunque nunca haya cabido en el mismo espacio físico. Cada recuerdo compartido a través de audios, de fotos, de llamadas que a veces se cortaban en el peor momento, es una página de un libro que todavía se está escribiendo.</p>
+      <p>Cuando sea viejo y la memoria quizás me traicione en otras cosas, estoy seguro de que los recuerdos contigo, Brissia, serán de los últimos en apagarse. Porque se grabaron en un lugar donde no llega el tiempo ordinario, en ese sitio del corazón donde viven las cosas que nos definen. Amarte desde lejos me convirtió en alguien que sabe valorar lo que no puede tocar. Y eso, aunque duela a veces, es uno de los regalos más grandes que me has dado.</p>
+      <div class="page-quote"><p>Añoro incluso los momentos que aún no han terminado, porque ya sé que los voy a extrañar cuando se vayan. Así de profundo es lo que me dejaste, Brissia.</p></div>
+    </div>
+    <div class="deco-hearts">♡ ♡ ♡</div>
+    <span class="page-num">— 2 —</span>
+  </div>
+
+  <!-- PÁGINA 3 — ALEGRÍA -->
+  <div class="page" id="alegria">
+    <div class="page-eyebrow">Emoción III</div>
+    <h2 class="page-title">La <em>Alegría</em> que Traes a mis Días</h2>
+    <div class="rule"></div>
+    <div class="page-text">
+      <p>Nadie me avisó que la alegría podía tener un nombre tan específico, una forma de reír que viaja intacta a través de un audio de WhatsApp y llega igual de cálida al otro lado. Pero tú eres exactamente eso, Brissia. Tú eres la alegría con nombre propio, la que no necesita estar en el mismo cuarto para hacerse sentir. El tipo de alegría que se instala en los momentos más simples, incluso cuando esos momentos ocurren a kilómetros de distancia.</p>
+      <p>Me alegras cuando me mandas un video de algo ridículo a las dos de la mañana porque sabías que me iba a hacer reír. Me alegras cuando te entusiasmas con algo pequeño y necesitas contármelo de inmediato aunque tengamos una hora de diferencia. Me alegras cuando haces voces distintas en los audios para contar una historia, cuando le pones dramatismo a lo que no lo necesita, cuando te ríes de ti misma antes de que yo pueda hacerlo. Esa espontaneidad tuya, esa ligereza con la que existes en el mundo, me alegra profundamente aunque la viva a través de una pantalla.</p>
+      <p>Contigo, Brissia, aprendí que la alegría compartida no necesita simultaneidad física. A veces es un meme enviado sin contexto que me hace reír solo en mi cuarto. A veces es despertar y encontrar un mensaje tuyo que escribiste cuando yo dormía, y saber que pensaste en mí antes de que yo abriera los ojos. A veces es simplemente saber que al otro lado de la distancia estás tú, con esa manera tan tuya de ser, y que en algún punto del día vamos a hablar y ese momento ya le da color al resto.</p>
+      <p>Quiero que sepas, Brissia, que me has dado más momentos de risa genuina, de esa risa que sube sin control y no pide permiso, que muchas cosas que tengo cerca. Que gracias a ti los días ordinarios tienen una capa extra de significado. Que cuando algo me sale bien, lo primero que quiero es contártelo. Que cuando algo sale mal, también. Porque tú eres la persona con quien quiero compartir la vida entera, en audios de treinta segundos si hace falta, porque incluso así, todo contigo vale la pena.</p>
+      <div class="page-quote"><p>La distancia nos enseñó a celebrar juntos desde lejos, y eso, Brissia, es una de las formas más bonitas de amor que conozco.</p></div>
+    </div>
+    <div class="deco-hearts">♡ ♡ ♡</div>
+    <span class="page-num">— 3 —</span>
+  </div>
+
+  <!-- PÁGINA 4 — GRATITUD -->
+  <div class="page" id="gratitud">
+    <div class="page-eyebrow">Emoción IV</div>
+    <h2 class="page-title"><em>Gratitud</em> sin Fin por tu Existencia</h2>
+    <div class="rule"></div>
+    <div class="page-text">
+      <p>Existe una gratitud que va más allá del simple "gracias". Es una gratitud que se asienta en los huesos, que se vuelve parte de tu manera de ver el mundo. Esa es la gratitud que yo, Camilo, siento por ti, Brissia. No es gratitud por un gesto aislado ni por un favor específico. Es gratitud por tu existencia entera, por el hecho de que el universo, con toda su inmensidad y su capricho, te puso en mi camino a través de una pantalla, a través de kilómetros, a través de todo lo que en teoría debería haber hecho esto más difícil.</p>
+      <p>Te agradezco que hayas decidido quedarte cuando quedarse no era lo fácil. Porque una relación a distancia exige algo que no todo el mundo está dispuesto a dar: constancia sin recompensa inmediata, fe en lo que no puedes tocar, paciencia con los días que son puro silencio de señal mala o tiempo diferente o simplemente cansancio. Tú elegiste quedarte de todas formas, Brissia, y esa elección la llevo conmigo como uno de los regalos más honestos que me han dado.</p>
+      <p>Te agradezco que me hayas mostrado partes de ti que no le muestras a todo el mundo. Esas partes vulnerables, inciertas, todavía en construcción. La confianza que implica abrirse así, estando lejos, sin poder leer el lenguaje del cuerpo del otro, sin poder ver si la reacción es buena o mala hasta que las palabras llegan, eso requiere una valentía enorme. Y tú la tuviste. Y yo la cuido como si fuera lo más delicado y precioso que me han entregado, porque lo es.</p>
+      <p>Te agradezco por cada conversación larga que empezamos sin saber cuándo íbamos a terminarla. Por cada vez que me dijiste algo honesto aunque fuera difícil de decir o de escuchar. Por cada momento en que elegiste a nosotros por encima de la comodidad de lo más sencillo. Esas elecciones, Brissia, no son automáticas. Cuestan. Y yo las valoro más de lo que encuentro palabras para decirlo, aunque lo intente en cada página de este libro.</p>
+      <div class="page-quote"><p>Gracias, Brissia, por existir, por ser quien eres, y por elegirme cada día aunque la distancia siempre nos ponga a prueba.</p></div>
+    </div>
+    <div class="deco-hearts">♡ ♡ ♡</div>
+    <span class="page-num">— 4 —</span>
+  </div>
+
+  <!-- PÁGINA 5 — PROMESAS -->
+  <div class="page" id="promesas">
+    <div class="page-eyebrow">Emoción V</div>
+    <h2 class="page-title">Las <em>Promesas</em> que te Hago en Silencio</h2>
+    <div class="rule"></div>
+    <div class="page-text">
+      <p>Las promesas más honestas no siempre se dicen en voz alta. A veces se guardan en el interior y se cumplen día a día, sin fanfarrias, sin testigos. Pero hoy, Brissia, quiero sacar las mías a la luz y dártelas de frente, con toda la seriedad y el cariño con que las he ido construyendo dentro de mí. Son promesas que no dependen de la perfección ni de que todo salga bien siempre. Son promesas para una relación como la nuestra, que ya demostró que puede sostenerse en lo más difícil, que es la distancia.</p>
+      <p>Te prometo estar presente aunque no esté cerca. Presente con mi atención cuando hablamos, con mis ganas reales de saber cómo estás, no el "¿cómo estás?" de protocolo sino el que pregunta de verdad y espera la respuesta con cuidado. Te prometo no dejar que la rutina de estar lejos me vuelva indiferente a lo que te pasa. Te prometo que nunca vas a sentir que eres una obligación, un ítem en una lista. Eres la persona con quien más quiero hablar, y eso no va a cambiar.</p>
+      <p>Te prometo trabajar para que la distancia tenga fecha de vencimiento. No me resigno a que esto sea para siempre el formato de nuestra relación. Creo en nosotros de una manera que incluye el proyecto concreto de estar juntos de verdad, en el mismo lugar, sin pantallas de por medio. Y mientras ese día llega, te prometo hacer que cada momento que tengamos, aunque sea virtual, cuente como si fuera el último antes de vernos.</p>
+      <p>Te prometo, Brissia, no rendirme en los días donde la distancia pesa más. Y habrá esos días, ya los hemos tenido. Días donde la diferencia horaria es cruel, donde una llamada cortada en el peor momento se siente como algo más que una falla técnica. En esos días te prometo elegirte de todas formas, recordar por qué empezamos, y apostar siempre por lo que somos. Porque lo que somos, Camilo y Brissia, vale todo el esfuerzo que nos cuesta.</p>
+      <div class="page-quote"><p>Te prometo no la perfección, sino la constancia. No la ausencia de distancia, sino la voluntad siempre renovada de acortarla con amor.</p></div>
+    </div>
+    <div class="deco-hearts">♡ ♡ ♡</div>
+    <span class="page-num">— 5 —</span>
+  </div>
+
+  <!-- PÁGINA 6 — SOLEDAD -->
+  <div class="page" id="soledad">
+    <div class="page-eyebrow">Emoción VI</div>
+    <h2 class="page-title">La <em>Soledad</em> que Siento cuando no Estás</h2>
+    <div class="rule"></div>
+    <div class="page-text">
+      <p>Existe un tipo de soledad que solo existe porque antes existió la conexión. Es una soledad que no estaba ahí antes de ti, Brissia, y por eso sé que es una señal de algo muy bueno. Antes de conocerte tenía mi propio mundo, mis propios ritmos, y me bastaban. Ahora tengo todo eso y además te tengo a ti, y cuando la señal se va, cuando los horarios no coinciden, cuando pasan días donde apenas pudimos hablar, hay un contorno que quedó en el aire con tu forma, y ese contorno lo echo de menos con una intensidad que a veces me sorprende.</p>
+      <p>Esta soledad nuestra tiene una particularidad cruel: no siempre puede resolverse con un abrazo. Cuando extraño a alguien que tengo cerca, puedo ir a buscarlo. Cuando te extraño a ti, Brissia, tengo que aprender a sostener esa falta con dignidad, a dejar que exista sin que me paralice, a convertirla en algo más parecido a la espera que a la ausencia. Eso no es fácil. Pero lo hago, porque lo que hay entre nosotros merece que yo sea capaz de sostener lo que cuesta.</p>
+      <p>Hay momentos específicos donde tu ausencia física se siente más aguda. Cuando pasa algo importante, bueno o malo, y lo primero que quiero es contártelo pero tengo que esperar a que despiertes o a que salgas de trabajar. Cuando veo algo que sé que te haría gracia y no puedo mostrártelo en tiempo real. Cuando el día fue de esos largos que no terminan y lo único que querría es estar sentado a tu lado, callado los dos, sin necesitar nada más que eso.</p>
+      <p>Pero incluso en esa soledad, Brissia, hay una gratitud extraña y poderosa. Porque la distancia me enseñó a valorar cada momento que tenemos como si fuera escaso, porque lo es. Cada llamada, cada mensaje, cada vez que coincidimos en el mismo instante desde lugares distintos del mundo: los recibo con una consciencia que quizás no tendría si te tuviera siempre cerca. Y eso, aunque duela, es también un regalo tuyo.</p>
+      <div class="page-quote"><p>La distancia duele, Brissia, pero me recuerda cada día por qué vale la pena seguir eligiéndote aunque no pueda tenerte cerca.</p></div>
+    </div>
+    <div class="deco-hearts">♡ ♡ ♡</div>
+    <span class="page-num">— 6 —</span>
+  </div>
+
+  <!-- PÁGINA 7 — ADMIRACIÓN -->
+  <div class="page" id="admiracion">
+    <div class="page-eyebrow">Emoción VII</div>
+    <h2 class="page-title">La <em>Admiración</em> que me Inspiras</h2>
+    <div class="rule"></div>
+    <div class="page-text">
+      <p>Si hay algo que me ha sorprendido de amarte, Brissia, es la cantidad de cosas que admiro en ti. Y lo más peculiar es que esa admiración creció en un contexto donde no podía verte con mis propios ojos la mayoría del tiempo, donde tuve que aprender a leer tu manera de ser a través de palabras y audios y expresiones en video. Y aun así, o quizás precisamente por eso, todo lo que descubrí me pareció digno de asombro.</p>
+      <p>Admiro tu fortaleza, Brissia. La que no hace ruido, la que no anuncia que está ahí. Esa fortaleza silenciosa con la que enfrentas los días difíciles sin necesitar que todo el mundo lo sepa. No siempre lo dices, no siempre lo muestras, pero yo lo veo incluso desde lejos. Y me parece una de las cosas más hermosas que puede tener una persona: la capacidad de seguir adelante cuando el camino no está claro, de sonreír cuando el mundo no te lo está poniendo fácil, de cargar con lo que pesa sin perder la ligereza.</p>
+      <p>Admiro cómo piensas. Esa manera tuya de llegar a conclusiones que a otros no se nos ocurrirían, de hacer preguntas que abren puertas en lugar de cerrarlas. Hablar contigo, Brissia, aunque sea a través de una pantalla y con diferencia horaria de por medio, siempre me activa algo que la rutina tiende a adormecer. No todo el mundo te hace pensar diferente. Tú lo haces cada vez que hablamos, y eso es un don que no se puede fabricar.</p>
+      <p>Admiro también tu bondad. Esa bondad que no busca reconocimiento, que aparece de manera natural, que no discrimina a quién se le da. En un mundo que a veces parece empeñado en volverse duro y cínico, tú conservas una ternura que me parece casi revolucionaria. No es ingenuidad, te lo aclaro: sé perfectamente que eres una mujer que piensa y que siente con toda la complejidad del mundo. Pero en medio de esa complejidad, elegiste seguir siendo buena. Y eso, Brissia, te admiro con todo lo que soy.</p>
+      <div class="page-quote"><p>Te admiro, Brissia, no por ser perfecta, sino por ser auténtica en un mundo que constantemente pide que seamos otra cosa.</p></div>
+    </div>
+    <div class="deco-hearts">♡ ♡ ♡</div>
+    <span class="page-num">— 7 —</span>
+  </div>
+
+  <!-- PÁGINA 8 — CALMA -->
+  <div class="page" id="calma">
+    <div class="page-eyebrow">Emoción VIII</div>
+    <h2 class="page-title">La <em>Calma</em> que Encuentro en Ti</h2>
+    <div class="rule"></div>
+    <div class="page-text">
+      <p>Antes de ti, Brissia, yo sabía lo que era la tranquilidad, pero no sabía lo que era este tipo particular de calma: la que viene de otra persona. La que no construyes solo sino que encuentras en alguien específico, en su manera de hablar, de escuchar, de existir en el mundo. Y lo que me asombra, lo que todavía me parece casi milagroso, es que esa calma la encontré en ti aunque nunca hayamos estado en el mismo espacio físico. Llegué a ella a través de una pantalla, y llegué igual.</p>
+      <p>Hay algo en tu voz, Brissia, que me baja la guardia. Algo en tu manera de escuchar a través de una llamada que me hace sentir que puedo decir lo que pienso sin necesidad de armarlo perfectamente antes. Algo en la manera en que respondes que le dice al ruido interior que puede descansar un rato. Esa calma no se fabrica. No se consigue con técnicas ni con esfuerzo. Se da o no se da, y contigo se da de una manera que todavía me sorprende cada vez que colgamos y me quedo pensando en la conversación.</p>
+      <p>Contigo aprendí que el amor a distancia también tiene sus formas de calma. No son las mismas que las de quien tiene al otro al lado, pero son reales. Es la calma de recibir tu mensaje cuando el día estuvo difícil. Es la calma de escuchar tu audio antes de dormir y quedarse con tu voz como último pensamiento. Es la calma de saber que mañana, aunque sea en diferente horario y a kilómetros de distancia, vamos a hablar de nuevo, y eso solo ya le da a todo un sentido diferente.</p>
+      <p>En los momentos donde el mundo se siente caótico, pienso en ti, Brissia, y algo cede. No porque tú resuelvas los problemas, sino porque tu existencia en mi vida me recuerda que hay cosas sólidas aunque no sean tangibles. Eres un ancla que no puedo tocar pero que siento perfectamente. Y en un mundo donde todo se mueve tan rápido, donde las cosas importantes a veces se escapan entre los dedos, que alguien sea capaz de darme esa calma desde tan lejos me parece uno de los regalos más extraordinarios que he recibido.</p>
+      <div class="page-quote"><p>Aprendí contigo, Brissia, que la paz más profunda no depende de la distancia. Depende de a quién llevas en el corazón.</p></div>
+    </div>
+    <div class="deco-hearts">♡ ♡ ♡</div>
+    <span class="page-num">— 8 —</span>
+  </div>
+
+  <!-- PÁGINA 9 — RECUERDOS -->
+  <div class="page" id="recuerdos">
+    <div class="page-eyebrow">Emoción IX</div>
+    <h2 class="page-title">Mis <em>Recuerdos</em> Favoritos Contigo</h2>
+    <div class="rule"></div>
+    <div class="page-text">
+      <p>Los recuerdos son extraños, Brissia. Los nuestros lo son todavía más, porque muchos no ocurrieron en un lugar físico sino en ese espacio sin coordenadas que construimos entre pantallas y señales. Y sin embargo son completamente reales, completamente vívidos, completamente nuestros. El corazón no distingue entre lo que se vivió cara a cara y lo que se vivió en una llamada de tres horas. Guarda lo que importó, y lo nuestro importó mucho.</p>
+      <p>Recuerdo la primera vez que te reíste de algo que dije y la risa llegó a través del teléfono y yo pensé que era el sonido más bonito que había escuchado en mucho tiempo. Recuerdo haber querido decirlo en ese momento y no haberme atrevido todavía, guardarlo como quien guarda algo valioso que todavía no sabe bien dónde poner. Recuerdo haberme quedado con ese sonido dando vueltas en la cabeza mucho después de que la llamada terminó.</p>
+      <p>Recuerdo conversaciones nuestras que empezaron en un tema cualquiera y terminaron en lugares que ninguno habría podido predecir. Recuerdo la sensación de esas conversaciones, Brissia: esa mezcla de estimulación y comodidad, de sentirse desafiado y al mismo tiempo completamente a gusto. Esas son las conversaciones que hacen que las personas se vuelvan indispensables para uno. Las que dejan huella aunque no hayan tenido testigos físicos, aunque no hayan ocurrido en ningún café ni en ningún parque.</p>
+      <p>Recuerdo también los silencios compartidos a distancia, que son quizás los más difíciles de lograr y los más valiosos cuando aparecen. Esos momentos donde ninguno de los dos necesitaba decir nada, donde bastaba saber que el otro estaba ahí al otro lado, leyendo algo o simplemente existiendo. Esos recuerdos, Brissia, son mi tesoro más honesto, y los guardo con el mismo cuidado con que guardaría cualquier cosa que valga la pena proteger.</p>
+      <div class="page-quote"><p>Los mejores recuerdos no necesitan lugar físico. Los nuestros viven en el espacio sin fronteras donde te encontré, Brissia.</p></div>
+    </div>
+    <div class="deco-hearts">♡ ♡ ♡</div>
+    <span class="page-num">— 9 —</span>
+  </div>
+
+  <!-- PÁGINA 10 — MIEDO -->
+  <div class="page" id="miedo">
+    <div class="page-eyebrow">Emoción X</div>
+    <h2 class="page-title">El <em>Miedo</em> de Perderte</h2>
+    <div class="rule"></div>
+    <div class="page-text">
+      <p>Sería deshonesto escribirte un libro, Brissia, que hable solo de lo bello. El amor auténtico también tiene sus vértigos, sus momentos de incertidumbre, sus miedos que se asoman en las horas más calladas de la noche. Y en una relación como la nuestra, donde la distancia ya es de por sí un desafío permanente, los miedos tienen más espacio para crecer si uno los deja. Yo prefiero sacarlos a la luz y dártelos así, directamente, porque los miedos que se nombran tienen menos poder que los que se esconden.</p>
+      <p>Me da miedo que la distancia nos canse antes de que podamos cerrarla. Que llegue un momento donde el peso de no estar juntos sea más grande que las ganas de seguir intentándolo. No porque no confíe en lo que siento ni en lo que sientes, Brissia, sino porque sé que el cansancio es real, que las circunstancias a veces pesan más de lo que deberían, y que el amor más genuino puede verse presionado por cosas que no tienen que ver con el amor. Ese miedo existe, y lo reconozco sin vergüenza.</p>
+      <p>Me da miedo no estar cuando me necesitas de verdad. Cuando las cosas se ponen difíciles para ti y lo único que puedo hacer es estar en una pantalla o en un audio, sin poder darte un abrazo, sin poder simplemente aparecer. Hay cosas que la tecnología no reemplaza, y yo lo sé. Me da miedo que en esos momentos la distancia se sienta como una traición de mi parte, aunque no lo sea, aunque yo también la esté sufriendo desde el otro lado.</p>
+      <p>Pero en ese miedo también hay una decisión, Brissia. La de hacer todo lo que esté en mis manos para que ninguno de esos peores escenarios se haga real. La de hablar cuando algo pesa, de no dejar que el silencio acumule lo que debería decirse. La de elegirte activamente, todos los días, incluso los días donde la distancia duele más. Porque elegirte cuando es fácil no dice tanto. Elegirte cuando cuesta, eso es lo que lo dice todo.</p>
+      <div class="page-quote"><p>El miedo a que la distancia nos gane me recuerda cada día que tengo que elegirte con más fuerza que ella. Y lo hago, Brissia. Lo hago.</p></div>
+    </div>
+    <div class="deco-hearts">♡ ♡ ♡</div>
+    <span class="page-num">— 10 —</span>
+  </div>
+
+  <!-- PÁGINA 11 — ORGULLO -->
+  <div class="page" id="orgullo">
+    <div class="page-eyebrow">Emoción XI</div>
+    <h2 class="page-title">El <em>Orgullo</em> de Tenerte a mi Lado</h2>
+    <div class="rule"></div>
+    <div class="page-text">
+      <p>Existe un tipo de orgullo que no tiene nada de vanidoso. Es el orgullo tranquilo, profundo, de quien mira a alguien que ama y siente que el pecho se le ensancha de admiración. Ese es el orgullo que siento por ti. No el orgullo de quien presume, sino el de quien está tan contento de lo que tiene al lado que a veces se queda callado simplemente para sentirlo más.</p>
+      <p>Me enorgulleces cuando luchas por lo que crees. Cuando no te doblas ante lo cómodo si lo cómodo implica traicionar lo que piensas. Esa coherencia entre lo que sientes y lo que haces, esa negativa silenciosa a ser menos de lo que eres para encajar en moldes que no te pertenecen, me parece una de las formas más elevadas de integridad. En un mundo donde la presión para adaptarse y disolverse en lo que otros esperan es constante, tú te mantienes. Eso es enorme.</p>
+      <p>Me enorgulleces cuando creces. Cuando tomas algo difícil y lo conviertes en aprendizaje, cuando el dolor no te amarga sino que te profundiza, cuando de las experiencias más complejas sacas algo que te hace más tú y no menos. Ese tipo de madurez no se adquiere fácilmente. Se construye con honestidad y con coraje, y tú lo tienes de una manera que a veces me deja sin palabras.</p>
+      <p>Pero también me enorgulleces en lo cotidiano. En la manera en que tratas a los demás con cuidado. En cómo eres con las personas que quieres. En tus pequeños actos de generosidad que no buscan audiencia. En tu sentido del humor, en tu creatividad, en la forma en que te tomas en serio las cosas que valen la pena y te ríes de lo que no vale la pena tomarse en serio. Soy muy afortunado de tener a alguien así a mi lado, y lo sé, y me alegra saberlo.</p>
+      <div class="page-quote"><p>Me enorgullece tenerte no para presumirte al mundo, sino para recordarme a mí mismo cada día lo afortunado que soy.</p></div>
+    </div>
+    <div class="deco-hearts">♡ ♡ ♡</div>
+    <span class="page-num">— 11 —</span>
+  </div>
+
+  <!-- PÁGINA 12 — ANHELO -->
+  <div class="page" id="anhelo">
+    <div class="page-eyebrow">Emoción XII</div>
+    <h2 class="page-title">El <em>Anhelo</em> del Futuro Contigo</h2>
+    <div class="rule"></div>
+    <div class="page-text">
+      <p>Hay algo que el amor hace con el tiempo: lo expande. No solo hacia el pasado, hacia los recuerdos que se atesoran, sino también hacia adelante, hacia todo lo que todavía no ha ocurrido. Contigo el futuro se siente diferente a como se sentía antes. Antes era una extensión de lo presente, algo que simplemente vendría. Ahora tiene forma, tiene color, tiene tu cara en él. Y anhelarlo se ha convertido en una de las cosas más bonitas de mi vida cotidiana.</p>
+      <p>Anhelo los días sin ningún plan particular, esos que se construyen solos y terminan siendo los más memorables precisamente porque nadie los diseñó. Anhelo despertarme sabiendo que ese día también estás tú. Anhelo los proyectos que hagamos juntos, los que ya sabemos y los que todavía ni imaginamos, los que requerirán esfuerzo y los que saldrán solos, los que nos harán crecer de maneras que todavía no podemos prever.</p>
+      <p>Anhelo conocerte más. Sé que eso puede sonar extraño porque ya te conozco, pero creo que las personas siempre tienen más capas, siempre hay algo nuevo que descubrir si uno se mantiene curioso y atento. Quiero conocer las versiones futuras de ti, la persona que serás dentro de cinco, diez, veinte años. Quiero ver cómo cambias y cómo te mantienes igual en lo esencial. Quiero ser testigo de tu vida y que tú seas testigo de la mía.</p>
+      <p>Anhelo también las dificultades, si es que vienen, no porque las quiera sino porque sé que las que se enfrentan juntos no hacen más que cementar algo. Anhelo poder ser el lugar donde llegues cuando el mundo sea pesado, y que tú seas el lugar donde yo llego cuando lo mismo me pasa a mí. Ese tipo de relación, donde dos personas se sostienen mutuamente sin perder su propio centro, me parece la forma más bella de estar con alguien.</p>
+      <div class="page-quote"><p>El futuro contigo no es algo que temo, es algo que anhelo con cada parte de quien soy.</p></div>
+    </div>
+    <div class="deco-hearts">♡ ♡ ♡</div>
+    <span class="page-num">— 12 —</span>
+  </div>
+
+  <!-- PÁGINA 13 — TERNURA -->
+  <div class="page" id="ternura">
+    <div class="page-eyebrow">Emoción XIII</div>
+    <h2 class="page-title">La <em>Ternura</em> que Despiertas en Mí</h2>
+    <div class="rule"></div>
+    <div class="page-text">
+      <p>Hay una versión de mí que solo existe contigo. Una versión más suave, más abierta, menos armada. No sé si siempre fue parte de mí y necesitaba que alguien específico la despertara, o si en parte tú la creaste simplemente siendo quien eres. Pero está ahí, y cuando aparece me sorprende su intensidad, porque no es algo que pueda forzar. Es espontánea. Es la respuesta natural de algo en mí a algo en ti.</p>
+      <p>Me da ternura cuando te quedas dormida en algún momento en que no lo planeabas, con esa paz total que tienen las personas dormidas y que las vuelve completamente vulnerables y completamente honestas. Me da ternura cuando te emocionas con algo y tratas de controlarlo aunque ya es demasiado tarde, cuando la emoción se te sale por los ojos antes de que hayas decidido mostrarla. Me da ternura cuando eres torpe con alguna cosa pequeña y te ríes de ti misma sin ningún drama.</p>
+      <p>Hay algo en tus pequeños rituales cotidianos, esas manías tuyas que probablemente ni siquiera notas que tienes, que me produce una ternura que no sé bien cómo describir. Es una mezcla de afecto y de asombro, de querer cuidarte y al mismo tiempo de reconocer que tú no necesitas que te cuiden, que eres perfectamente capaz de estar en el mundo sola. Pero querer cuidarte de todas formas. Eso es la ternura: querer dar algo que no necesariamente te piden pero que ofreces de todos modos.</p>
+      <p>Esta ternura que me despiertas me ha enseñado algo sobre mí mismo: que tengo más capacidad de suavidad de lo que creía. Que el amor, cuando es del bueno, no endurece sino que ablanda las partes que uno había ido acorzando sin darse cuenta. Gracias por eso también. Por hacer que sea un poco más tierno, un poco más capaz de sentir sin protegerme tanto de lo que siento. Eso, en silencio, es uno de los regalos más grandes que me has dado.</p>
+      <div class="page-quote"><p>Contigo descubrí que la ternura no es debilidad sino la forma más valiente de amar: amar sin escudos.</p></div>
+    </div>
+    <div class="deco-hearts">♡ ♡ ♡</div>
+    <span class="page-num">— 13 —</span>
+  </div>
+
+  <!-- PÁGINA 14 — ETERNIDAD -->
+  <div class="page" id="eternidad">
+    <div class="page-eyebrow">Emoción XIV</div>
+    <h2 class="page-title">Lo que Siento por Ti es <em>Eterno</em></h2>
+    <div class="rule"></div>
+    <div class="page-text">
+      <p>La eternidad es una palabra grande. Quizás demasiado grande para ser usada con ligereza. Pero hay cosas que, cuando las sientes de verdad, te fuerzan a recurrir a las palabras grandes porque las pequeñas no alcanzan. Lo que siento por ti es una de esas cosas. No sé si el amor dura para siempre en términos literales; nadie puede prometerlo con certeza. Pero sí sé que lo que llevamos construido juntos tiene una solidez que no parece frágil. Tiene los cimientos de algo que fue pensado para durar.</p>
+      <p>Cuando pienso en eternidad no pienso necesariamente en infinito abstracto. Pienso en esa sensación de que algunas cosas, aunque tengan principio y fin, dejan una marca que no desaparece. Como que alguien que amaste de verdad sigue siendo parte de ti de alguna manera, incluso cuando el tiempo o la distancia los separa. De esa manera, lo que siento por ti ya es eterno: porque ya me cambió, ya me marcó, ya soy diferente a quien era antes de conocerte, y eso no tiene reversa.</p>
+      <p>Pero también lo digo en el sentido más cotidiano y hermoso de la palabra: que quiero que esto dure. Que no hay una fecha de vencimiento en mis ganas de tenerte. Que me imagino en diferentes etapas de mi vida y en todas te imagino también, de distintas formas quizás, cambiados ambos por el tiempo, pero ahí, presentes el uno para el otro. Ese deseo de permanencia no es posesivo. Es simplemente el reconocimiento de que encontré algo tan bueno que no quiero que termine.</p>
+      <p>Lo eterno no es la ausencia de cambio. Es la permanencia del amor a través del cambio. Que aunque ambos seamos diferentes dentro de años, haya algo en el núcleo de lo que somos juntos que se mantenga fiel a sí mismo. Ese es el tipo de eternidad que creo en, que deseo para nosotros, que trabajo para construir cada día con las cosas pequeñas y concretas que forman la materia de una relación real. Todo eso, para ti, siempre.</p>
+      <div class="page-quote"><p>No te prometo que seré el mismo para siempre. Te prometo que lo que siento por ti resistirá todas las versiones de ambos.</p></div>
+    </div>
+    <div class="deco-hearts">♡ ♡ ♡</div>
+    <span class="page-num">— 14 —</span>
+  </div>
+
+  <!-- PÁGINA 15 — CIERRE -->
+  <div class="page" id="cierre">
+    <div class="page-eyebrow">Página Final</div>
+    <h2 class="page-title">Una Última Cosa que Quiero <em>Decirte</em></h2>
+    <div class="rule"></div>
+    <div class="page-text">
+      <p>Llegamos al final de este libro, aunque lo que sentimos no tenga final. Escribí estas páginas porque hay cosas que se sienten mejor cuando encuentran forma de palabra, cuando salen del interior silencioso donde viven y se vuelven algo tangible que puedes sostener. No soy perfectamente elocuente; a veces las palabras no llegan exactas o llegan tarde o no alcanzan para lo que quieren decir. Pero aquí están, lo mejor que pude reunir, todo para ti.</p>
+      <p>Quiero que sepas, por encima de todo lo que escribí en cada página, que eres una persona extraordinaria. No en el sentido de perfecta, sino en el sentido original de la palabra: fuera de lo ordinario. Hay algo en ti que se distingue, que no se puede imitar ni fabricar, que es tuyo y solo tuyo. Y ese algo es lo que me enamoró, lo que me sigue enamorando, lo que probablemente me seguirá enamorando sin importar cuánto tiempo pase.</p>
+      <p>Este libro es un mapa de lo que siento. Si algún día dudas, si algún día el ruido del mundo te hace dudar de lo que eres para mí, abre cualquier página y encuentra ahí la respuesta. No soy alguien que ama a medias. Lo que siento por ti es completo, es real, es tuyo. Cada emoción que escribí aquí es verdadera. No hay una sola línea de adorno vacío. Todo viene de ese lugar hondo que reservamos para las cosas que importan de verdad.</p>
+      <p>Gracias por leer hasta aquí. Gracias por existir. Gracias por ser quien eres, por dejarme conocerte, por elegirme. Me alegra tanto que el universo haya decidido que nuestros caminos se cruzaran. Me alegra tanto que de entre todos los mundos posibles, en este específico, estemos aquí, juntos. Te amo más de lo que cualquier página puede contener, pero espero que estas páginas, al menos, te den una idea.</p>
+      <div class="page-quote"><p>Tuyo completamente, con todo lo que soy, en todos los días que vengan.</p></div>
+    </div>
+    <div class="deco-hearts">✦ ♡ ✦</div>
+    <span class="page-num">— Fin —</span>
+  </div>
+
+</div><!-- /book -->
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Volver arriba">↑</button>
+
+<script>
+  /* ── PETALS ── */
+  const symbols = ['🌸','🌹','✿','❀','♡','✦','❤'];
+  const pc = document.getElementById('particles');
+  for (let i = 0; i < 28; i++) {
+    const p = document.createElement('span');
+    p.className = 'petal';
+    p.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (8 + Math.random() * 14) + 's';
+    p.style.animationDelay = (Math.random() * 12) + 's';
+    p.style.fontSize = (10 + Math.random() * 14) + 'px';
+    p.style.opacity = (0.3 + Math.random() * 0.5);
+    pc.appendChild(p);
+  }
+
+  /* ── INTERSECTION OBSERVER ── */
+  const pages = document.querySelectorAll('.page');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  pages.forEach(p => obs.observe(p));
+
+  /* ── SCROLL NAV ── */
+  function scrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  /* ── BACK TO TOP ── */
+  const btn = document.getElementById('back-top');
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('show', window.scrollY > 500);
+  });
+
+  /* ── ACTIVE NAV BUTTON ── */
+  const sectionIds = ['cover','amor','nostalgia','alegria','gratitud','promesas','soledad','admiracion','calma','recuerdos','miedo','orgullo','anhelo','ternura','eternidad','cierre'];
+  const navBtns = document.querySelectorAll('.em-btn');
+  const ioNav = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navBtns.forEach(b => b.classList.remove('active'));
+        const idx = sectionIds.indexOf(e.target.id);
+        if (idx >= 0 && navBtns[idx]) navBtns[idx].classList.add('active');
+      }
+    });
+  }, { threshold: 0.4 });
+  sectionIds.forEach(id => { const el = document.getElementById(id); if(el) ioNav.observe(el); });
+</script>
 </body>
 </html>
