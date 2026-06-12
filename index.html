@@ -1,94 +1,209 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Para Ti ❤️</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi Niña Hermosa</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<div class="book">
+    <div class="background-decorations">
+        <div class="heart h1"></div>
+        <div class="heart h2"></div>
+        <div class="heart h3"></div>
+    </div>
 
-  <!-- PORTADA -->
-  <div class="page cover">
-    <img src="img/portada.jpg" alt="Ella">
-    <h1>Para ti 💖</h1>
-    <p class="subtitle">No porque tenga que hacerlo, sino porque no encontré otra forma de guardarte.</p>
-  </div>
+    <div class="main-container">
+        <!-- Menú de navegación por emociones -->
+        <div class="emotion-menu">
+            <h3>¿Cómo te sientes hoy, mi amor?</h3>
+            <div class="menu-buttons">
+                <button onclick="goToPage(2)">Feliz</button>
+                <button onclick="goToPage(4)">Triste o Cansada</button>
+                <button onclick="goToPage(6)">Extrañándome</button>
+                <button onclick="goToPage(8)">Insegura</button>
+                <button onclick="goToPage(10)">Abrumada</button>
+                <button onclick="goToPage(12)">Amada</button>
+                <button onclick="goToPage(14)">Nostálgica</button>
+            </div>
+        </div>
 
-  <div class="page">
-    <h2>Cuando estoy contigo</h2>
-    <p>Hay algo en ti que no hace ruido, pero cambia todo. No es algo que se vea fácilmente… pero cuando estás, todo se siente en su lugar. No necesito que pase nada extraordinario. A veces solo estar contigo ya es suficiente.</p>
-  </div>
+        <!-- El Libro -->
+        <div class="book-container">
+            <div class="book" id="book">
+                
+                <!-- PÁGINA 1: PORTADA -->
+                <div class="page cover-page active">
+                    <div class="cover-content">
+                        <h1 class="main-title">Un Refugio para Ti</h1>
+                        <div class="photo-frame">
+                            <!-- Aquí va la foto. Asegúrate de tener 'portada.jpg' en la misma carpeta -->
+                            <img src="portada.jpg" alt="Mi niña hermosa" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=600&auto=format&fit=crop'">
+                        </div>
+                        <p class="subtitle">Abre este libro cuando tu corazón lo necesite...</p>
+                        <p class="signature">Hecho con todo mi amor</p>
+                    </div>
+                </div>
 
-  <div class="page">
-    <h2>Cuando te extraño</h2>
-    <p>Extrañarte no es solo pensar en ti. Es notar tu ausencia en cosas pequeñas. Es querer contarte algo y quedarme con las palabras guardadas. Es sentir que el día estuvo incompleto.</p>
-  </div>
+                <!-- PÁGINAS 2 Y 3: CUANDO ESTÁS FELIZ -->
+                <div class="page">
+                    <div class="page-content">
+                        <span class="page-number">2</span>
+                        <h2 class="emotion-title">Cuando estás Feliz (Parte I)</h2>
+                        <p class="love-text">
+                            Ver tu sonrisa o saber que tu día desborda alegría es, sin duda alguna, el motor que impulsa mis propios días. Tu felicidad tiene un eco profundo en mí, una capacidad mágica de iluminar cualquier rincón oscuro de mi mente. Cuando ríes, el mundo entero parece sincronizarse en una melodía perfecta, y no hay distancia, por muy grande o pesada que parezca, que pueda apagar el brillo de saberte plena. Me encanta cuando me cuentas esas pequeñas victorias de tu día, cuando me envías un mensaje cargado de entusiasmo o cuando simplemente sientes que la vida te sonríe. Quiero que guardes este fragmento en tu memoria para esos días en que las nubes intenten tapar tu sol: tu alegría es un regalo para este mundo, y específicamente para mí, es el recordatorio constante de que la belleza real existe. Nunca dejes de buscar esos motivos que te hacen vibrar alto, porque ver cómo conquistas tu propio bienestar es una de las experiencias más inspiradoras que tengo la fortuna de presenciar. En la distancia, celebro cada uno de tus logros y cada destello de tu felicidad como si fuera propio. Eres pura luz, mi niña, y saber que hoy tu corazón está contento me da una paz infinita, una certeza de que estamos construyendo un camino hermoso donde tu bienestar siempre será mi prioridad absoluta. Sigue brillando así de fuerte, amor.
+                        </p>
+                    </div>
+                </div>
 
-  <div class="page">
-    <h2>Cuando discutimos</h2>
-    <p>No me gusta cuando discutimos… porque por un momento siento que nos perdemos. Pero incluso ahí, sigo queriendo quedarme contigo. Porque lo que somos pesa más que cualquier momento difícil.</p>
-  </div>
+                <div class="page">
+                    <div class="page-content">
+                        <span class="page-number">3</span>
+                        <h2 class="emotion-title">Cuando estás Feliz (Parte II)</h2>
+                        <p class="love-text">
+                            Esa energía tan bonita que desprendes cuando estás feliz es algo que se queda grabado en mí durante horas. Me pongo a pensar en la suerte tan inmensa que tengo de compartir la vida contigo, de ser la persona que escucha tus risas y que recibe tus audios llenos de emoción. Tu felicidad no es solo tuya, es un bienestar que se expande y me abraza a mí también, recordándome que lo nuestro es un refugio seguro. Quiero que celebres cada momento feliz, que te sientas orgullosa de quien eres y de todo lo que estás logrando día con día. A veces la vida nos llena de pendientes y de rutinas pesadas, pero ver que te tomas el tiempo de disfrutar, de sonreír por las cosas sencillas y de sentirte plena, me llena de un orgullo indescriptible. Eres una mujer increíble, llena de virtudes, y te mereces absolutamente todo lo bueno que te está pasando hoy. Guarda esta sensación bonita en tu pecho, saboréala y recuerda que siempre estaré aquí para aplaudir tus éxitos, para reírme contigo y para asegurarme de que nunca te falten motivos para mantener esa hermosa sonrisa en tu rostro. Que este estado de paz y alegría te acompañe durante mucho tiempo, y cuando flaquee, regresa aquí para recordar lo bien que se siente ver el mundo a través de tus ojos felices. Te amo con todo mi ser.
+                        </p>
+                    </div>
+                </div>
 
-  <div class="page">
-    <h2>Lo que admiro de ti</h2>
-    <p>Admiro cosas tuyas que quizá ni tú notas. Tu forma de pensar, de sentir, de ser tú. No eres perfecta… y eso es justo lo que hace que todo en ti sea real.</p>
-  </div>
+                <!-- PÁGINAS 4 Y 5: CUANDO ESTÁS TRISTE O CANSADA -->
+                <div class="page">
+                    <div class="page-content">
+                        <span class="page-number">4</span>
+                        <h2 class="emotion-title">Cuando estás Triste o Cansada (Parte I)</h2>
+                        <p class="love-text">
+                            Sé que hay días en los que el peso del mundo se siente el doble de grande y la energía parece evaporarse por completo. Si hoy es uno de esos días en los que la tristeza te acompaña o el cansancio te nubla los pensamientos, quiero que te detengas un momento, respires profundo y te permitas sentir. No tienes que ser fuerte todo el tiempo, mi amor; está bien estar cansada, está bien no tener todas las respuestas y está bien dejar caer los hombros. Me duele no poder estar físicamente a tu lado para darte un abrazo de esos que reconstruyen el alma, pero quiero que cierres los ojos e imagines mis brazos rodeándote con toda la ternura del mundo. Estoy aquí contigo, sosteniéndote en el silencio, escuchando lo que tu corazón no puede expresar con palabras. Eres una mujer asombrosamente fuerte, pero incluso las almas más resilientes necesitan un descanso. No te presiones por resolver todo hoy; el mundo puede esperar un momento mientras tú te cuidas y recuperas tus fuerzas. Permítete llorar si lo necesitas, deja salir todo eso que te abruma. Recuerda que la tristeza es solo una nube pasajera y que detrás de ella, tu luz sigue intacta. Yo me quedo aquí cuidando de ti en la distancia, recordándote lo valiosa que eres y esperando pacientemente a que te sientas lista para volver a sonreír. No estás sola en esto.
+                        </p>
+                    </div>
+                </div>
 
-  <div class="page">
-    <h2>Cuando pienso en el futuro</h2>
-    <p>No sé exactamente cómo será el futuro. Pero cuando lo imagino… siempre apareces tú. No como una idea, sino como alguien que ya se volvió parte de lo que quiero.</p>
-  </div>
+                <div class="page">
+                    <div class="page-content">
+                        <span class="page-number">5</span>
+                        <h2 class="emotion-title">Cuando estás Triste o Cansada (Parte II)</h2>
+                        <p class="love-text">
+                            El cansancio físico y mental a veces nos hace creer que no estamos haciendo lo suficiente, pero quiero recordarte que lo estás haciendo excelente. Mírate, has superado tantas cosas y sigues adelante con una valentía que me conmueve profundamente. Hoy no es el día para juzgarte ni para exigirte más de la cuenta; hoy es el día para consentirte, para descansar y para recordar que mi amor por ti no depende de qué tan productiva seas, sino de la maravillosa persona que eres. Si la tristeza te visita, no intentes esconderla de mí; prefiero mil veces acompañarte en tus momentos grises que solo estar en los días soleados. Nuestro amor es un espacio seguro donde puedes quitarte la armadura y ser completamente vulnerable. Descansa tu mente, mi niña, deja que los pensamientos negativos se vayan con el viento y quédate solo con la certeza de que eres profundamente amada. Mañana será otro día, con nuevas oportunidades y energías renovadas, pero hoy solo concéntrate en descansar y en dejarte querer. Imagina que te acaricio el cabello y te digo al oído que todo va a estar bien, porque realmente lo estará. Estoy increíblemente orgulloso de ti, de tu esfuerzo constante y de tu gran corazón. Tómate todo el tiempo que necesites, que yo no me voy a mover de tu lado.
+                        </p>
+                    </div>
+                </div>
 
-  <div class="page">
-    <h2>Mis miedos</h2>
-    <p>Sí, tengo miedo. No de ti… sino de lo que significas. Porque cuando alguien importa de verdad, también existe la posibilidad de perderlo.</p>
-  </div>
+                <!-- PÁGINAS 6 Y 7: CUANDO ME EXTRAÑAS -->
+                <div class="page">
+                    <div class="page-content">
+                        <span class="page-number">6</span>
+                        <h2 class="emotion-title">Cuando me Extrañas (Parte I)</h2>
+                        <p class="love-text">
+                            La distancia puede ser increíblemente difícil y sé perfectamente lo mucho que duele desear un abrazo y tener que conformarse con una pantalla. Si me estás extrañando en este preciso instante, quiero que sepas que yo también te estoy extrañando con la misma o incluso con más intensidad. Cada kilómetro que nos separa se desvanece cuando pienso en el amor tan inmenso que nos une. La distancia no debilita lo que sentimos; al contrario, es la prueba más clara de que nuestro vínculo es real, fuerte y capaz de superar cualquier obstáculo físico. No veas los días separados como un castigo, míralos como una cuenta regresiva que nos acerca cada vez más al momento de estar juntos sin horarios ni despedidas. Cuando sientas que la soledad te aprieta el pecho, mira hacia el cielo y recuerda que compartimos las mismas estrellas y el mismo sol. Mi corazón late al unísono con el tuyo, y no pasa un solo día en el que no estés presente en mis pensamientos, en mis planes y en mis deseos más profundos. Extrañarte es el precio que pago por tener la fortuna de amar a alguien tan extraordinaria como tú, y te aseguro que vale cada segundo de espera. Esto es temporal, mi vida, y la recompensa de nuestro reencuentro será tan hermosa que hará que todo este esfuerzo cobre un sentido perfecto. Te amo y te acompaño en cada pensamiento.
+                        </p>
+                    </div>
+                </div>
 
-  <div class="page">
-    <h2>Lo que eres para mí</h2>
-    <p>No eres “todo”. Pero sí eres una parte tan importante… que sin ti, muchas cosas dejarían de sentirse igual.</p>
-  </div>
+                <div class="page">
+                    <div class="page-content">
+                        <span class="page-number">7</span>
+                        <h2 class="emotion-title">Cuando me Extrañas (Parte II)</h2>
+                        <p class="love-text">
+                            Piensa en el momento en que volvamos a vernos: el olor de tu perfume, la calidez de tus manos entrelazadas con las mías, la primera mirada fija que nos daremos y ese abrazo eterno en el que el resto del mundo simplemente va a desaparecer. Que ese recuerdo del futuro sea tu combustible para hoy. Extrañarse también es una forma de amor; nos recuerda que lo que tenemos no es común, que nos importamos de una manera profunda y que hemos encontrado en el otro un verdadero hogar. Cuando me extrañes, busca los pequeños detalles que nos conectan: esa canción que nos gusta, los mensajes que nos dejamos, o este mismo libro que diseñé pensando exclusivamente en tu paz mental. No estás sola en este sentimiento, yo camino contigo a cada paso que das, cuidándote desde donde estoy y enviándote toda mi energía positiva. Eres mi pensamiento favorito al despertar y el último antes de dormir. La distancia física es solo un detalle técnico cuando dos almas están tan irrevocablemente entrelazadas como las nuestras. Mantén la calma, mi niña, que el tiempo pasa volando y pronto estaremos riéndonos de estos días de espera mientras nos abrazamos fuerte. Gracias por tu paciencia, por tu amor incondicional y por ser mi cable a tierra. Te amo más de lo que las palabras pueden expresar.
+                        </p>
+                    </div>
+                </div>
 
-  <div class="page">
-    <h2>Momentos simples</h2>
-    <p>No todo tiene que ser intenso. También me gustan esos momentos donde no pasa nada… pero igual se siente bien contigo.</p>
-  </div>
+                <!-- PÁGINAS 8 Y 9: CUANDO TE SIENTES INSEGURA -->
+                <div class="page">
+                    <div class="page-content">
+                        <span class="page-number">8</span>
+                        <h2 class="emotion-title">Cuando te Sientes Insegura (Parte I)</h2>
+                        <p class="love-text">
+                            A veces, la mente nos juega malas pasadas y nos hace dudar de nuestro valor, de nuestra belleza o de nuestras capacidades. Si hoy te sientes insegura por cualquier motivo, quiero convertirme en el espejo que te devuelva la realidad de quién eres. Eres una mujer absolutamente maravillosa, inteligente, hermosa por dentro y por fuera, con una esencia única que llena de luz a quienes tienen la dicha de conocerte. Tus imperfecciones, esas que a veces miras con demasiada severidad, son parte del diseño perfecto que te hace ser tú, y para mí, eres perfecta en todas tus facetas. No permitas que una duda pasajera nuble la certeza de todo lo que vales. Mi amor por ti no se basa en un estándar idealizado, sino en tu realidad: en tu forma de hablar, en tu ternura, en tu resiliencia y en la manera en que cuidas de los tuyos. Cuando dudes de ti misma, recuerda que hay alguien aquí que te admira profundamente y que ve en ti una fuente inagotable de inspiración. Eres suficiente, eres valiosa y mereces ocupar espacio en este mundo con la frente muy en alto. No te compares con nadie más, porque nadie tiene tu sonrisa, nadie tiene tu gran corazón ni tu hermosa forma de ver la vida. Eres mi mayor orgullo, mi niña bonita, y mi amor por ti es firme, constante e inquebrantable, sin importar las dudas que crucen por tu mente.
+                        </p>
+                    </div>
+                </div>
 
-  <div class="page">
-    <h2>Cuando duele</h2>
-    <p>A veces también duele. No porque hagas algo mal… sino porque sentir tanto también tiene ese lado. Pero incluso ahí, no me voy.</p>
-  </div>
+                <div class="page">
+                    <div class="page-content">
+                        <span class="page-number">9</span>
+                        <h2 class="emotion-title">Cuando te Sientes Insegura (Parte II)</h2>
+                        <p class="love-text">
+                            Quiero que recuerdes que no hay nada malo en tener dudas o momentos de fragilidad, pero no dejes que esas inseguridades echen raíces en tu mente. Mírate a través de mis ojos por un instante: verías a una mujer con una fuerza increíble, una dulzura que desarma a cualquiera y una belleza que va muchísimo más allá de lo físico, una belleza que emana de tu alma noble. Cada vez que sientas miedo o incertidumbre sobre el futuro o sobre ti misma, ven a este espacio y lee esto: te elegí a ti y te sigo eligiendo todos los días de mi vida como mi compañera, mi amor y mi refugio. Tu valor no se mide por la opinión de los demás ni por los días malos en que no te sientes al cien por ciento. Eres un ser humano valiosísimo, lleno de talentos y con un futuro brillante por delante. Permítete equivocarte, permítete aprender y, sobre todo, sé más amable contigo misma. Te amo tal y como eres, con tus risas y tus llantos, con tus certezas y tus dudas. Nunca pienses que eres una carga o que no eres suficiente, porque para mí lo eres todo y mucho más. Confía en ti tanto como yo confío en ti, y camina con la seguridad de saber que tienes a alguien que te ama con locura apoyándote en cada paso del camino.
+                        </p>
+                    </div>
+                </div>
 
-  <div class="page">
-    <h2>Lo que no digo siempre</h2>
-    <p>No siempre sé cómo decir lo que siento. A veces me lo guardo. Pero eso no significa que sea menos… a veces es todo lo contrario.</p>
-  </div>
+                <!-- PÁGINAS 10 Y 11: CUANDO ESTÁS ABRUMADA -->
+                <div class="page">
+                    <div class="page-content">
+                        <span class="page-number">10</span>
+                        <h2 class="emotion-title">Cuando estás Abrumada (Parte I)</h2>
+                        <p class="love-text">
+                            Cuando las responsabilidades, los deberes, las tareas y las presiones del día a día se acumulan, es muy fácil sentir que la respiración se acorta y que la mente se satura. Si te encuentras en ese estado de agobio donde todo parece urgente y caótico, te pido que hagas una pausa absoluta ahora mismo. Deja a un lado lo que estás haciendo por un minuto. Cierra los ojos. Inhala aire profundamente... reténlo... y suéltalo despacio. El mundo no se va a derrumbar si te detienes un momento a recuperar el aliento. No tienes que solucionarlo todo en este instante, ni tienes que cargar con todas las responsabilidades sobre tus hombros tú sola. Vamos a desarmar ese caos paso a paso, juntos, aunque estemos lejos. Concéntrate solo en lo que tienes justo en frente, en la tarea más pequeña, y olvídate del resto por ahora. Eres sumamente capaz y organizada, pero no eres una máquina, eres un ser humano que necesita pausas. Estoy aquí para recordarte que tu paz mental es infinitamente más importante que cualquier entrega, examen o pendiente. Si necesitas desahogarte, hablar sin parar para ordenar tus ideas o simplemente llorar de frustración, hazlo conmigo. No estás sola en medio de la tormenta, yo sostengo tu mano y te prometo que, como todas las veces anteriores, vas a salir de esta con éxito. Confío en tu capacidad, pero amo tu bienestar.
+                        </p>
+                    </div>
+                </div>
 
-  <div class="page">
-    <h2>Lo que haces en mí</h2>
-    <p>No cambias quién soy… pero sí haces que quiera ser mejor. No por obligación, sino porque contigo todo tiene más sentido.</p>
-  </div>
+                <div class="page">
+                    <div class="page-content">
+                        <span class="page-number">11</span>
+                        <h2 class="emotion-title">Cuando estás Abrumada (Parte II)</h2>
+                        <p class="love-text">
+                            Es normal sentir que las cosas se salen de control de vez en cuando, el agobio es parte de la vida activa que llevas, pero no dejes que defina tu día. Quiero que mires este texto como un espacio de calma en medio de tu rutina ruidosa. Imagina un lugar tranquilo, en silencio, donde solo estamos tú y yo, lejos de los deberes y las presiones del entorno. Ese es nuestro espacio real, el que verdaderamente importa. Lo demás es secundario y temporal. No te exijas perfección en todo lo que haces; hacer lo mejor que puedes con la energía que tienes disponible hoy ya es más que suficiente. Aprende a decir que no cuando tu cuerpo y tu mente te lo pidan, pon límites para proteger tu tranquilidad. Yo admiro muchísimo tu dedicación y tu ética, pero me importa mucho más ver que te cuidas. Si el día de hoy se siente como una montaña empinada, recuerda que no tienes que llegar a la cima en un solo salto, basta con dar un paso a la vez. Tómate las cosas con calma, trátate con suavidad y recuerda que este nudo en la garganta va a pasar pronto. Te envío un abrazo lleno de paz, fuerza y serenidad para que disuelva ese estrés que tienes acumulado. Todo estará bien, mi niña, confía en el proceso y descansa.
+                        </p>
+                    </div>
+                </div>
 
-  <div class="page">
-    <h2>Lo que quiero que sepas</h2>
-    <p>No sé cuánto dure todo esto. Pero mientras esté… quiero que sea real, sincero y sin medias tintas.</p>
-  </div>
+                <!-- PÁGINAS 12 Y 13: CUANDO QUIERES SENTIRTE AMADA -->
+                <div class="page">
+                    <div class="page-content">
+                        <span class="page-number">12</span>
+                        <h2 class="emotion-title">Cuando quieres sentirte Amada (Parte I)</h2>
+                        <p class="love-text">
+                            Si entraste a esta página buscando una dosis de amor, quiero que te prepares para leer lo mucho que significas para mí. Decir que te amo se queda corto ante la inmensidad de lo que realmente siento en mi pecho cada vez que pienso en ti. Eres la persona que cambió por completo mi perspectiva del mundo, trayendo consigo una ternura, una complicidad y una alegría que no sabía que existían de esta manera tan pura. Amar a alguien como tú es un privilegio diario: amo tu voz, la forma en que tus ojos se achican cuando te ríes, tu inteligencia brillante, tus pasiones y hasta tus manías más pequeñas. Eres mi primer pensamiento al despertar y la razón por la que sonrío mirando la pantalla del celular como un tonto en mitad del día. No hay distancia que pueda disminuir la fuerza de este sentimiento, porque estás arraigada en mi corazón de una forma definitiva. Quiero que nunca, bajo ninguna circunstancia, dudes del lugar tan sagrado que ocupas en mi vida. Eres mi prioridad, mi proyecto favorito de futuro y la persona con la que quiero compartir mis mayores alegrías y apoyarme en mis peores caídas. Tu amor me hace una mejor persona, me inspira a crecer y me llena de una gratitud inmensa hacia la vida por haber cruzado nuestros caminos de una forma tan perfecta.
+                        </p>
+                    </div>
+                </div>
 
-  <div class="page final">
-    <h2>Para ti</h2>
-    <p>No hice esto para impresionarte. Lo hice porque hay cosas que no caben en una conversación normal. Y si llegaste hasta aquí… entonces ya sabes algo importante:</p>
-    <p class="highlight">Te elijo. Incluso en lo simple. Incluso en lo difícil.</p>
-  </div>
+                <div class="page">
+                    <div class="page-content">
+                        <span class="page-number">13</span>
+                        <h2 class="emotion-title">Cuando quieres sentirte Amada (Parte II)</h2>
+                        <p class="love-text">
+                            Mi amor por ti es un compromiso activo de cuidarte, respetarte y valorarte cada día, recordándote lo especial que eres incluso cuando tú misma lo olvides. Eres la dueña absoluta de mis sonrisas más sinceras y de mis mejores deseos. Me fascina la forma en que nos entendemos con solo un mensaje, la complicidad que hemos construido a pesar de los kilómetros y la certeza de saber que somos un equipo inquebrantable. No importa lo que pase en el mundo exterior, en mis brazos y en mi corazón siempre tendrás un hogar seguro, un refugio cálido donde eres completamente aceptada, admirada y amada sin condiciones. Eres mi hermosa niña, mi compañera de vida y mi amor eterno. Cada detalle tuyo tiene un valor incalculable para mí, y me siento el hombre más afortunado del universo por tener el derecho de llamarte mi novia. Quédate con esta certeza absoluta hoy y siempre: eres profundamente amada, deseada y valorada por este novio que no ve la hora de tenerte cerca para demostrártelo en persona con mil besos. Tu existencia es el regalo más bonito que he recibido, y prometo pasar el resto de mis días cuidando este amor tan hermoso que nos une. Nunca olvides lo mucho que te amo.
+                        </p>
+                    </div>
+                </div>
 
-</div>
+                <!-- PÁGINAS 14 Y 15: CUANDO ESTÁS NOSTÁLGICA -->
+                <div class="page">
+                    <div class="page-content">
+                        <span class="page-number">14</span>
+                        <h2 class="emotion-title">Cuando estás Nostálgica (Parte I)</h2>
+                        <p class="love-text">
+                            La nostalgia es un sentimiento agridulce que nos hace viajar al pasado, recordar momentos específicos y añorar la cercanía con fuerza. Si hoy te invade ese sentimiento, quiero que lo abraces como una prueba de lo hermoso que ha sido nuestro camino. Recuerda los días en que todo comenzó, los primeros mensajes, las risas nerviosas, las promesas silenciosas que fuimos construyendo y los momentos compartidos que hoy forman el tesoro más grande de nuestra relación. Cada recuerdo juntos es un recordatorio de por qué vale la pena cada esfuerzo actual. La nostalgia no debe ser un motivo de tristeza, sino una hermosa confirmación de que tenemos una historia real y significativa que vale la pena atesorar con el alma. Piensa en las anécdotas divertidas que nos han hecho llorar de risa, en las conversaciones profundas de madrugada donde nos abrimos por completo y en los pequeños rituales que solo nosotros entendemos. Todo eso es nuestro, nadie nos lo puede quitar, y es la base sólida sobre la cual seguimos construyendo nuestro amor día con día. Deja que esos recuerdos te den calidez en el pecho hoy, como una manta suave que te protege del frío de la distancia. El pasado ha sido maravilloso a tu lado, pero te aseguro que el futuro que nos espera será aún más increíble.
+                        </p>
+                    </div>
+                </div>
 
-<div class="controls">
-  <button onclick="prevPage()">⬅</button>
-  <button onclick="nextPage()">➡</button>
-</div>
+                <div class="page">
+                    <div class="page-content">
+                        <span class="page-number">15</span>
+                        <h2 class="emotion-title">Cuando estás Nostálgica (Parte II)</h2>
+                        <p class="love-text">
+                            Miras atrás y ves cuánto hemos crecido, cómo hemos madurado juntos y cómo nuestro amor se ha fortalecido superando cada pequeña o gran prueba que la vida nos ha puesto en el camino. Estar nostálgica es normal, es el reflejo de un corazón que ama intensamente y que sabe apreciar los momentos hermosos de la vida. Quiero que uses esa nostalgia como inspiración para imaginar todo lo que nos falta por vivir: los viajes que planeamos, la casa que diseñaremos en nuestra mente, las mañanas despertando juntos sin prisas y las rutinas sencillas que compartiremos día a día. Estamos construyendo una historia de amor de las que valen la pena contar, una historia llena de respeto, superación y una ternura inigualable. No te sientas triste por lo que hoy añoras, siéntete emocionada por la certeza de que volveremos a crear recuerdos aún más bellos muy pronto. Te llevo conmigo en cada paso, en cada rincón de mi memoria y en cada latido. Eres mi cable a tierra y mi mayor inspiración. Gracias por regalarme un pasado tan hermoso y por darme el motivo más grande para mirar al futuro con esperanza y entusiasmo. Te amo con toda mi alma, mi niña linda, hoy, mañana y para siempre. Gracias por ser tú.
+                        </p>
+                    </div>
+                </div>
 
-<script src="script.js"></script>
+            </div>
+        </div>
+
+        <!-- Botones de navegación del libro -->
+        <div class="navigation-buttons">
+            <button id="prevBtn" onclick="prevPage()">◀ Anterior</button>
+            <button id="nextBtn" onclick="nextPage()">Siguiente ▶</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
